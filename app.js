@@ -524,6 +524,14 @@ function saveRecipe() {
             .value
             .trim(),
 
+       sourceName:
+          document
+          .getElementById(
+              "inputSourceName"
+          )
+          .value
+          .trim(),
+
         image: null,
 
         ingredients:
@@ -838,6 +846,10 @@ function displayRecipe() {
         url.href =
             recipe.url;
 
+        url.innerText =
+           recipe.sourceName ||
+           recipe.url;
+
         url.style.display =
             "inline-block";
 
@@ -1086,6 +1098,11 @@ function editCurrentRecipe() {
         .value =
         recipe.url || "";
 
+   document
+       .getElementById("inputSourceName")
+       .value =
+        recipe.sourceName || "";
+
     document
         .getElementById("inputIngredients")
         .value =
@@ -1170,6 +1187,14 @@ function updateRecipe(
                 )
                 .value
                 .trim();
+
+            recipe.sourceName =
+               document
+               .getElementById(
+                 "inputSourceName"
+               )
+               .value
+               .trim();
 
             recipe.ingredients =
                 document
@@ -1348,6 +1373,12 @@ function clearForm() {
             "inputURL"
         )
         .value = "";
+
+    document
+       .getElementById(
+           "inputSourceName"
+       )
+       .value = "";
 
     document
         .getElementById(
