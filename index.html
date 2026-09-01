@@ -538,32 +538,39 @@
 
         <!-- WEBSITE PLACEHOLDER -->
 
-        <div id="urlImportArea"
-             class="hidden">
+    <div id="urlImportArea"
+         class="hidden">
 
+        <div class="divider"></div>
 
-            <div class="divider"></div>
+        <h3>
+            Import from a Website
+        </h3>
 
+        <p>
+            Paste the link to a recipe page. RecipeNest will try to
+            extract the recipe for you.
+        </p>
 
-            <h3>
-                Website Import
-            </h3>
+        <label>
+            Recipe URL
+        </label>
 
+        <input
+            id="websiteURL"
+            type="url"
+            placeholder="https://example.com/recipe">
 
-            <p>
-                Website importing will be connected next.
-            </p>
+        <button class="primary-button"
+                onclick="importWebsite()">
 
+            Import Recipe
 
-        </div>
+        </button>
 
+        <div id="websiteStatus"></div>
 
     </div>
-
-
-</section>
-
-
 
 <!-- =====================================
      SEARCH
