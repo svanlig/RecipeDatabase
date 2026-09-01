@@ -3,14 +3,20 @@ from flask_cors import CORS
 
 import requests
 from bs4 import BeautifulSoup
+from pypdf import PdfReader
 
 import json
+import io
 
 
 app = Flask(__name__)
 
 CORS(app)
 
+
+# =========================================
+# HOME
+# =========================================
 
 @app.route("/")
 def home():
@@ -19,6 +25,10 @@ def home():
         "status": "RecipeNest backend is running!"
     })
 
+
+# =========================================
+# WEBSITE RECIPE IMPORT
+# =========================================
 
 @app.route("/import-recipe", methods=["POST"])
 def import_recipe():
@@ -57,9 +67,7 @@ def import_recipe():
             timeout=15
         )
 
-
         response.raise_for_status()
-
 
     except requests.RequestException as error:
 
@@ -74,7 +82,6 @@ def import_recipe():
     )
 
 
-    # Look for Recipe structured data
     recipe_data = find_recipe_data(soup)
 
 
@@ -97,6 +104,91 @@ def import_recipe():
     return jsonify(recipe)
 
 
+# =========================================
+# PDF IMPORT
+# =========================================
+
+@app.route("/import-pdf", methods=["POST"])
+def import_pdf():
+
+    if "file" not in request.files:
+
+        return jsonify({
+            "error": "No PDF file was uploaded."
+        }), 400
+
+
+    file = request.files["file"]
+
+
+    if file.filename == "":
+
+        return jsonify({
+            "error": "No file was selected."
+        }), 400
+
+
+    if not file.filename.lower().endswith(".pdf"):
+
+        return jsonify({
+            "error": "Please select a PDF file."
+        }), 400
+
+
+    try:
+
+        pdf_bytes = file.read()
+
+        reader = PdfReader(
+            io.BytesIO(pdf_bytes)
+        )
+
+
+        pages = []
+
+
+        for page in reader.pages:
+
+            text = page.extract_text()
+
+            if text:
+
+                pages.append(text)
+
+
+        full_text = "\n\n".join(pages)
+
+
+        if not full_text.strip():
+
+            return jsonify({
+                "error": (
+                    "This PDF does not contain "
+                    "selectable text. It may be a scanned PDF."
+                )
+            }), 400
+
+
+        return jsonify({
+
+            "filename": file.filename,
+
+            "text": full_text
+
+        })
+
+
+    except Exception as error:
+
+        return jsonify({
+            "error": f"Could not read PDF: {error}"
+        }), 400
+
+
+# =========================================
+# RECIPE JSON-LD FUNCTIONS
+# =========================================
+
 def find_recipe_data(soup):
 
     scripts = soup.find_all(
@@ -112,7 +204,6 @@ def find_recipe_data(soup):
             data = json.loads(
                 script.string or script.get_text()
             )
-
 
         except (json.JSONDecodeError, TypeError):
 
@@ -134,14 +225,13 @@ def search_for_recipe(data):
 
     if isinstance(data, dict):
 
-        # Direct Recipe object
         if data.get("@type") == "Recipe":
 
             return data
 
 
-        # Sometimes @type is a list
         types = data.get("@type", [])
+
 
         if isinstance(types, list):
 
@@ -150,7 +240,6 @@ def search_for_recipe(data):
                 return data
 
 
-        # Search @graph
         if "@graph" in data:
 
             result = search_for_recipe(
@@ -181,14 +270,11 @@ def extract_recipe(data, url):
     image = data.get("image")
 
 
-    # Some websites return several images.
-    # For now we take only the first.
     if isinstance(image, list):
 
         image = image[0] if image else None
 
 
-    # Sometimes image is an object.
     if isinstance(image, dict):
 
         image = image.get("url")
@@ -201,14 +287,20 @@ def extract_recipe(data, url):
 
 
     instructions = extract_instructions(
-        data.get("recipeInstructions", [])
+        data.get(
+            "recipeInstructions",
+            []
+        )
     )
 
 
     return {
 
         "name":
-            data.get("name", "").strip(),
+            data.get(
+                "name",
+                ""
+            ).strip(),
 
         "image":
             image,
@@ -220,16 +312,28 @@ def extract_recipe(data, url):
             instructions,
 
         "prepTime":
-            data.get("prepTime", ""),
+            data.get(
+                "prepTime",
+                ""
+            ),
 
         "cookTime":
-            data.get("cookTime", ""),
+            data.get(
+                "cookTime",
+                ""
+            ),
 
         "totalTime":
-            data.get("totalTime", ""),
+            data.get(
+                "totalTime",
+                ""
+            ),
 
         "servings":
-            data.get("recipeYield", ""),
+            data.get(
+                "recipeYield",
+                ""
+            ),
 
         "url":
             url
@@ -239,7 +343,10 @@ def extract_recipe(data, url):
 
 def extract_instructions(instructions):
 
-    if isinstance(instructions, str):
+    if isinstance(
+        instructions,
+        str
+    ):
 
         return instructions
 
@@ -249,41 +356,62 @@ def extract_instructions(instructions):
 
     for item in instructions:
 
-        if isinstance(item, str):
+        if isinstance(
+            item,
+            str
+        ):
 
             result.append(item)
 
 
-        elif isinstance(item, dict):
+        elif isinstance(
+            item,
+            dict
+        ):
 
             text = item.get("text")
+
 
             if text:
 
                 result.append(text)
 
 
-            # Handle HowToSection
-            elif item.get("@type") == "HowToSection":
+            elif item.get(
+                "@type"
+            ) == "HowToSection":
 
                 steps = item.get(
                     "itemListElement",
                     []
                 )
 
+
                 for step in steps:
 
-                    if isinstance(step, dict):
+                    if isinstance(
+                        step,
+                        dict
+                    ):
 
-                        text = step.get("text")
+                        text = step.get(
+                            "text"
+                        )
+
 
                         if text:
 
-                            result.append(text)
+                            result.append(
+                                text
+                            )
 
 
     return "\n\n".join(result)
 
+
+# =========================================
+# START SERVER
+# =========================================
 
 if __name__ == "__main__":
 
