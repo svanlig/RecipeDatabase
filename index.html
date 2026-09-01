@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Recipe Database</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <!-- ===== GOOGLE FONTS ===== -->
+
+    <link href="https://fonts.googleapis.com/css?family=Aboreto" rel="stylesheet" type="text/css">
+    <style>
+        * {
+            font-family: 'Aboreto', sans-serif;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Abril Fatface" rel="stylesheet" type="text/css">
+    <style>
+        * {
+            font-family: 'Abril Fatface', sans-serif;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="logo">
+        RECIPE DATABASE
+    </div>
+
+    <div class="tagline">
+        Made. Loved. Saved.
+    </div>
+
+</header>
+
+
+<nav class="main-nav">
+
+    <button onclick="showBook()">
+        My Recipes
+    </button>
+
+    <button onclick="showAdd()">
+        + Add Recipe
+    </button>
+
+    <button onclick="showSearch()">
+        Find Recipe
+    </button>
+
+</nav>
+
+
+
+<main>
+
+
+<!-- =====================================
+     COOKBOOK / RECIPE PAGE
+===================================== -->
+
+<section id="bookPage">
+
+
+    <div class="book-controls">
+
+        <button onclick="previousRecipe()">
+            ←
+        </button>
+
+        <span id="pageNumber">
+            0 / 0
+        </span>
+
+        <button onclick="nextRecipe()">
+            →
+        </button>
+
+    </div>
+
+
+
+    <div class="book">
+
+
+        <article class="recipe-card">
+            <span id="recipeTime" class="hidden"></span>
+            <span id="recipeServings" class="hidden"></span>
+
+
+            <!-- TOP BAR -->
+
+            <div class="recipe-topbar">
+
+
+                <span id="recipeCategory"
+                      class="category">
+                </span>
+
+
+                <div class="top-actions">
+
+                    <button onclick="editCurrentRecipe()">
+                        Edit
+                    </button>
+
+                    <button onclick="deleteCurrentRecipe()">
+                        Delete
+                    </button>
+
+                    <button onclick="printRecipe()">
+                        PDF
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- TITLE -->
+
+            <div class="title-section">
+
+                <h1 id="recipeTitle">
+                    Your Recipe Database
+                </h1>
+
+            </div>
+
+
+
+            <div class="double-rule"></div>
+
+
+
+            <!-- STORY + PHOTO -->
+
+            <div class="intro-grid">
+
+
+                <div id="recipeStory"
+                     class="recipe-story">
+                </div>
+
+
+                <div class="photo-section">
+
+                    <img id="recipeImage"
+                         src=""
+                         alt="Recipe">
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- MAIN CONTENT -->
+
+            <div class="content-grid">
+
+
+                <!-- LEFT COLUMN -->
+
+                <div class="instructions-column">
+
+
+                    <h2>
+                        Instructions
+                    </h2>
+
+
+                    <div id="recipeInstructions">
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- RIGHT COLUMN -->
+
+                <aside class="right-column">
+
+
+                    <section class="ingredients-section">
+
+                        <h2>
+                            Ingredients
+                        </h2>
+
+
+                        <ul id="recipeIngredients">
+                        </ul>
+
+                    </section>
+
+
+
+                    <div class="sidebar-rule"></div>
+
+
+
+                    <section class="notes-section">
+
+                        <h2>
+                            My Kitchen <span>Notes</span>
+                        </h2>
+
+
+                        <div id="recipeNotes">
+                        </div>
+
+                    </section>
+
+
+                </aside>
+
+
+            </div>
+
+
+
+            <!-- SOURCE -->
+
+            <div class="recipe-footer">
+
+
+                <div class="source">
+
+                    <span>
+                        SOURCE:
+                    </span>
+
+                    <a id="recipeURL"
+                       href="#"
+                       target="_blank">
+
+                        Original recipe
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </article>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================
+     ADD RECIPE
+===================================== -->
+
+<section id="addPage"
+         class="hidden">
+
+
+    <div class="form-card">
+
+
+        <div class="section-heading">
+
+            <div class="small-heading">
+                ADD TO THE DATABASE
+            </div>
+
+            <h2>
+                Add a Recipe
+            </h2>
+
+            <p>
+                Save a recipe worth making again.
+            </p>
+
+        </div>
+
+
+
+        <div class="add-methods">
+
+
+            <button class="method-card"
+                    onclick="showPDFImport()">
+
+                <span class="method-icon">
+                    PDF
+                </span>
+
+                <strong>
+                    Import PDF
+                </strong>
+
+                <small>
+                    Import a saved recipe
+                </small>
+
+            </button>
+
+
+
+            <button class="method-card"
+                    onclick="showManualForm()">
+
+                <span class="method-icon">
+                    +
+                </span>
+
+                <strong>
+                    Enter Manually
+                </strong>
+
+                <small>
+                    Add your own recipe
+                </small>
+
+            </button>
+
+
+
+            <button class="method-card"
+                    onclick="showURLImport()">
+
+                <span class="method-icon">
+                    URL
+                </span>
+
+                <strong>
+                    From Website
+                </strong>
+
+                <small>
+                    Coming next
+                </small>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- PDF IMPORT -->
+
+        <div id="pdfImportArea"
+             class="hidden">
+
+
+            <div class="divider"></div>
+
+
+            <h3>
+                Import a PDF
+            </h3>
+
+
+            <p>
+                Choose a recipe PDF from your computer.
+            </p>
+
+
+            <input
+                type="file"
+                id="pdfFile"
+                accept=".pdf">
+
+
+            <button class="primary-button"
+                    onclick="importPDF()">
+
+                Import PDF
+
+            </button>
+
+
+            <div id="pdfStatus"></div>
+
+
+        </div>
+
+
+
+        <!-- MANUAL FORM -->
+
+        <div id="manualForm"
+             class="hidden">
+
+
+            <div class="divider"></div>
+
+
+            <h3>
+                Recipe Details
+            </h3>
+
+
+
+            <label>
+                Recipe Name *
+            </label>
+
+            <input id="inputName"
+                   type="text"
+                   placeholder="Recipe name">
+
+
+
+            <label>
+                Category *
+            </label>
+
+            <select id="inputCategory">
+
+                <option>Breakfast</option>
+
+                <option>Appetizers & Snacks</option>
+
+                <option>Main Dishes</option>
+
+                <option>Soups, Salads & Sides</option>
+
+                <option>Desserts</option>
+
+                <option>Chocolate</option>
+
+                <option>Drinks</option>
+
+                <option>Family Heirlooms</option>
+
+            </select>
+
+
+
+            <label>
+                Recipe Story
+            </label>
+
+            <textarea id="inputStory"
+                      placeholder="How did you find this recipe? Did your family like it? Why did you decide to save it?">
+            </textarea>
+
+
+
+            <label>
+                Recipe Photo
+            </label>
+
+            <input id="inputImage"
+                   type="file"
+                   accept="image/*"
+                   capture="environment">
+
+
+
+            <label>
+                Recipe URL
+            </label>
+
+            <input id="inputURL"
+                   type="url"
+                   placeholder="Paste the original recipe URL">
+            
+            <label>
+                Source Name
+            </label>
+
+            <input id="inputSourceName"
+                   type="text"
+                   placeholder="Example: RecipeTin Eats">
+
+
+            <label>
+                Ingredients *
+            </label>
+
+            <textarea id="inputIngredients"
+                      placeholder="One ingredient per line">
+            </textarea>
+
+
+
+            <label>
+                Instructions *
+            </label>
+
+            <textarea id="inputInstructions"
+                      placeholder="Write the instructions here">
+            </textarea>
+
+
+
+            <label>
+                My Kitchen Notes
+            </label>
+
+            <textarea id="inputNotes"
+                      placeholder="Changes you made, what worked, what didn't, ideas for next time...">
+            </textarea>
+
+
+
+            <button class="primary-button"
+                    onclick="saveRecipe()">
+
+                Save Recipe
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- WEBSITE PLACEHOLDER -->
+
+        <div id="urlImportArea"
+             class="hidden">
+
+
+            <div class="divider"></div>
+
+
+            <h3>
+                Website Import
+            </h3>
+
+
+            <p>
+                Website importing will be connected next.
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================
+     SEARCH
+===================================== -->
+
+<section id="searchPage"
+         class="hidden">
+
+
+    <div class="search-container">
+
+
+        <div class="small-heading">
+            YOUR COLLECTION
+        </div>
+
+
+        <h2>
+            Find a Recipe
+        </h2>
+
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search by recipe name..."
+            oninput="searchRecipes()">
+
+
+
+        <select
+            id="categoryFilter"
+            onchange="searchRecipes()">
+
+            <option value="All">
+                All Categories
+            </option>
+
+            <option>Breakfast</option>
+
+            <option>Appetizers & Snacks</option>
+
+            <option>Main Dishes</option>
+
+            <option>Soups, Salads & Sides</option>
+
+            <option>Desserts</option>
+
+            <option>Chocolate</option>
+
+            <option>Drinks</option>
+
+            <option>Family Heirlooms</option>
+
+        </select>
+
+
+
+        <div id="searchResults">
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<script src="app.js">
+</script>
+
+
+</body>
+
+</html>
