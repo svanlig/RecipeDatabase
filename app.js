@@ -329,6 +329,171 @@ async function importPDF() {
 
 }
 
+/* =========================================
+   WEBSITE IMPORT
+========================================= */
+
+async function importWebsite() {
+
+    const url =
+        document
+        .getElementById(
+            "websiteURL"
+        )
+        .value
+        .trim();
+
+
+    const status =
+        document
+        .getElementById(
+            "websiteStatus"
+        );
+
+
+    if (!url) {
+
+        status.innerText =
+            "Please enter a recipe URL.";
+
+        return;
+
+    }
+
+
+    status.innerText =
+        "Looking for the recipe...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://127.0.0.1:5000/import-url",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            url: url
+                        })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.error) {
+
+            status.innerText =
+                data.error;
+
+            return;
+
+        }
+
+
+        /*
+         * Open the manual form
+         * and fill it with the
+         * imported recipe.
+         */
+
+        showAdd();
+
+        showManualForm();
+
+
+        document
+            .getElementById(
+                "inputName"
+            )
+            .value =
+            data.name || "";
+
+
+        document
+            .getElementById(
+                "inputURL"
+            )
+            .value =
+            data.url || url;
+
+
+        document
+            .getElementById(
+                "inputSourceName"
+            )
+            .value =
+            data.sourceName || "";
+
+
+        document
+            .getElementById(
+                "inputIngredients"
+            )
+            .value =
+            (data.ingredients || [])
+            .join("\n");
+
+
+        document
+            .getElementById(
+                "inputInstructions"
+            )
+            .value =
+            data.instructions || "";
+
+
+        /*
+         * Story and Kitchen Notes
+         * are personal fields,
+         * so leave them blank.
+         */
+
+        document
+            .getElementById(
+                "inputStory"
+            )
+            .value = "";
+
+
+        document
+            .getElementById(
+                "inputNotes"
+            )
+            .value = "";
+
+
+        status.innerText =
+            "";
+
+
+        alert(
+            "Recipe imported. Please review it before saving."
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        status.innerText =
+            "Could not connect to RecipeNest. Make sure Flask is running.";
+
+    }
+
+}
+
 
 /* =========================================
    BASIC PDF HELPERS
