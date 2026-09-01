@@ -1,0 +1,798 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barriecito&family=Cedarville+Cursive&family=Didact+Gothic&family=Josefin+Slab:wght@500;600;700&family=Nanum+Pen+Script&display=swap');
+
+
+/* =====================================
+   BASE
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background: #e8e6e1;
+
+    color: #292929;
+
+    font-family: "Barlow", sans-serif;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.site-header {
+    padding: 25px 20px 8px;
+
+    text-align: center;
+}
+
+
+.logo {
+    font-family: "Aboreto", serif;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+.tagline {
+    margin-top: 4px;
+
+    font-family: "Cedarville Cursive", cursive;
+    font-size: 2rem;
+
+    color: #555;
+}
+
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    padding: 12px 20px 25px;
+}
+
+
+.main-nav button {
+    padding: 8px 15px;
+
+    border: 1px solid #555;
+
+    background: #f7f6f2;
+
+    color: #333;
+
+    font-family: "Aboreto", sans-serif;
+
+    cursor: pointer;
+}
+
+
+.main-nav button:hover {
+    background: #dedbd5;
+}
+
+
+/* =====================================
+   MAIN
+===================================== */
+
+main {
+    max-width: 1120px;
+
+    margin: auto;
+
+    padding: 0 15px 50px;
+}
+
+
+/* =====================================
+   PAGE CONTROLS
+===================================== */
+
+.book-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+
+.book-controls button {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #555;
+
+    background: #f7f6f2;
+
+    cursor: pointer;
+
+    font-size: 1rem;
+}
+
+
+#pageNumber {
+    font-family: "Aboreto", serif;
+    font-weight: 700;
+}
+
+
+/* =====================================
+   RECIPE PAGE
+===================================== */
+
+.recipe-card {
+    min-height: 760px;
+
+    padding: 14px;
+
+    background: #f7f6f2;
+
+    border: 1px solid #bdbbb6;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, .10);
+}
+
+
+/* =====================================
+   TOP BAR
+===================================== */
+
+.recipe-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    min-height: 38px;
+
+    border-bottom: 1px solid #555;
+}
+
+
+.category {
+    font-family: "Aboreto", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.top-actions {
+    display: flex;
+    gap: 7px;
+}
+
+
+.top-actions button {
+    padding: 5px 8px;
+
+    border: 1px solid #555;
+
+    background: transparent;
+
+    font-family: "Aboreto", sans-serif;
+    font-size: .75rem;
+
+    cursor: pointer;
+}
+
+
+.top-actions button:hover {
+    background: #dedbd5;
+}
+
+
+/* =====================================
+   TITLE
+===================================== */
+
+.title-section {
+    padding: 18px 10px 16px;
+}
+
+
+#recipeTitle {
+    margin: 0;
+
+    color: #303030;
+
+    font-family: "Abril Fatface", serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 600;
+
+    line-height: .95;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.double-rule {
+    height: 7px;
+
+    margin-bottom: 12px;
+
+    border-top: 2px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+
+/* =====================================
+   STORY + PHOTO
+===================================== */
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+}
+
+
+.recipe-story {
+    padding: 12px 15px;
+
+    min-height: 170px;
+
+    background: #e8c05e;
+
+    color: #29231d;
+
+    font-family: "Cedarville Cursive", cursive;
+    font-size: 1.3rem;
+
+    line-height: 1.4;
+
+    white-space: pre-line;
+}
+
+
+.recipe-story:empty {
+    display: none;
+}
+
+
+.photo-section {
+    min-height: 300px;
+
+    border: 2px solid #333;
+
+    overflow: hidden;
+
+    background: #dedbd5;
+}
+
+
+#recipeImage {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    /* Editorial / slightly vintage food photograph */
+    filter: saturate(0.75) contrast(1.08) brightness(0.98) sepia(0.12);
+}
+
+#recipeImage[src=""] {
+    display: none;
+}
+
+
+/* =====================================
+   MAIN COLUMNS
+===================================== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2.15fr 1fr;
+
+    margin-top: 8px;
+}
+
+
+/* =====================================
+   INSTRUCTIONS
+===================================== */
+
+.instructions-column {
+    padding: 0 15px 30px 0;
+}
+
+
+.instructions-column h2,
+.ingredients-section h2,
+.notes-section h2 {
+    margin: 0 0 7px;
+
+    font-family: "Josefin Slab", serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.instructions-column h2 {
+    padding: 3px 6px;
+
+    border: 2px solid #555;
+}
+
+
+#recipeInstructions {
+    padding-top: 8px;
+
+    font-family: "Barlow", sans-serif;
+    font-size: .95rem;
+
+    line-height: 1.38;
+
+    white-space: pre-line;
+}
+
+
+/* =====================================
+   RIGHT COLUMN
+===================================== */
+
+.right-column {
+    padding: 0 0 30px 15px;
+
+    border-left: 1px solid #555;
+}
+
+
+.ingredients-section h2 {
+    padding-bottom: 5px;
+
+    border-bottom: 1px solid #555;
+}
+
+
+#recipeIngredients {
+    margin: 8px 0 0;
+
+    padding-left: 18px;
+
+    font-family: "Didact Gothic", sans-serif;
+    font-size: .88rem;
+    font-weight: 600;
+
+    line-height: 1.35;
+}
+
+
+#recipeIngredients li {
+    margin-bottom: 2px;
+}
+
+
+.sidebar-rule {
+    height: 1px;
+
+    margin: 16px 0;
+
+    background: #555;
+}
+
+
+/* =====================================
+   KITCHEN NOTES
+===================================== */
+
+.notes-section h2 {
+    font-size: 1.15rem;
+}
+
+
+.notes-section h2 span {
+    color: #287a82;
+}
+
+
+#recipeNotes {
+    min-height: 50px;
+
+    font-family: "Barlow", sans-serif;
+    font-size: .9rem;
+
+    line-height: 1.45;
+
+    white-space: pre-line;
+}
+
+
+#recipeNotes:empty::after {
+    content: "";
+
+    display: block;
+
+    height: 20px;
+}
+
+
+/* =====================================
+   SOURCE
+===================================== */
+
+.recipe-footer {
+    margin-top: auto;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #555;
+}
+
+
+.source {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: .72rem;
+
+    letter-spacing: .5px;
+
+    text-transform: uppercase;
+}
+
+
+.source span {
+    font-weight: 700;
+}
+
+
+.source a {
+    margin-left: 4px;
+
+    color: #333;
+
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 1.25rem;
+
+    letter-spacing: normal;
+
+    text-decoration: none;
+
+    text-transform: none;
+}
+
+
+.source a:hover {
+    text-decoration: underline;
+}
+
+
+/* =====================================
+   FORMS
+===================================== */
+
+.form-card,
+.search-container {
+    max-width: 760px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    background: #f7f6f2;
+
+    border: 1px solid #bdbbb6;
+}
+
+
+.section-heading {
+    text-align: center;
+}
+
+
+.small-heading {
+    font-family: "Josefin Slab", serif;
+    font-size: .9rem;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.section-heading h2,
+.search-container h2 {
+    margin: 7px 0;
+
+    font-family: "Josefin Slab", serif;
+    font-size: 2.3rem;
+}
+
+
+.add-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.method-card {
+    min-height: 150px;
+
+    padding: 18px;
+
+    border: 1px solid #777;
+
+    background: #efede8;
+
+    color: #333;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.method-card:hover {
+    background: #e2dfd8;
+}
+
+
+.method-icon {
+    font-family: "Josefin Slab", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+
+.divider {
+    height: 1px;
+
+    margin: 30px 0;
+
+    background: #aaa;
+}
+
+
+label {
+    display: block;
+
+    margin-top: 18px;
+    margin-bottom: 6px;
+
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 600;
+}
+
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #999;
+
+    background: #fbfaf7;
+
+    color: #333;
+
+    font-family: "Barlow", sans-serif;
+}
+
+
+textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+.primary-button {
+    margin-top: 24px;
+
+    padding: 11px 20px;
+
+    border: 1px solid #444;
+
+    background: #333;
+
+    color: #fff;
+
+    font-family: "Josefin Slab", serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* =====================================
+   SEARCH
+===================================== */
+
+.search-container input,
+.search-container select {
+    margin-top: 14px;
+}
+
+
+.search-result {
+    padding: 14px 5px;
+
+    border-bottom: 1px solid #bbb;
+
+    cursor: pointer;
+}
+
+
+.search-result:hover {
+    background: #e9e7e1;
+}
+
+
+.search-result strong {
+    display: block;
+
+    font-family: "Josefin Slab", serif;
+    font-size: 1.2rem;
+}
+
+
+.search-result small {
+    font-family: "Didact Gothic", sans-serif;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 700px) {
+
+
+    .recipe-card {
+        padding: 10px;
+    }
+
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .recipe-story {
+        min-height: auto;
+    }
+
+
+    .photo-section,
+    #recipeImage {
+        height: 240px;
+    }
+
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .instructions-column {
+        padding-right: 0;
+    }
+
+
+    .right-column {
+        padding: 18px 0 30px;
+
+        border-left: none;
+        border-top: 1px solid #555;
+    }
+
+
+    .add-methods {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-card,
+    .search-container {
+        padding: 22px;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+
+    #recipeTitle {
+        font-size: 2.3rem;
+    }
+
+
+    .recipe-topbar {
+        align-items: flex-start;
+        gap: 10px;
+
+        padding-bottom: 8px;
+    }
+
+
+    .top-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+
+    .photo-section,
+    #recipeImage {
+        min-height: 190px;
+    }
+
+}
+
+
+/* =====================================
+   PRINT / PDF
+===================================== */
+
+@media print {
+
+
+    body {
+        background: white;
+    }
+
+
+    .site-header,
+    .main-nav,
+    .book-controls,
+    .top-actions {
+        display: none !important;
+    }
+
+
+    main {
+        max-width: none;
+
+        padding: 0;
+    }
+
+
+    .recipe-card {
+        border: none;
+
+        box-shadow: none;
+    }
+
+}
