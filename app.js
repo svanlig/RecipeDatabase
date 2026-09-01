@@ -337,18 +337,18 @@ async function importWebsite() {
 
     const url =
         document
-            .getElementById(
-                "websiteURL"
-            )
-            .value
-            .trim();
+        .getElementById(
+            "websiteURL"
+        )
+        .value
+        .trim();
 
 
     const status =
         document
-            .getElementById(
-                "websiteStatus"
-            );
+        .getElementById(
+            "websiteStatus"
+        );
 
 
     if (!url) {
@@ -441,7 +441,7 @@ async function importWebsite() {
             )
             .value =
             (data.ingredients || [])
-                .join("\n");
+            .join("\n");
 
 
         document
@@ -493,6 +493,8 @@ async function importWebsite() {
     }
 
 }
+
+
 /* =========================================
    BASIC PDF HELPERS
 ========================================= */
@@ -687,13 +689,13 @@ function saveRecipe() {
             .value
             .trim(),
 
-        sourceName:
-            document
-            .getElementById(
-                 "inputSourceName"
-             )
-            .value
-            .trim(),
+       sourceName:
+          document
+          .getElementById(
+              "inputSourceName"
+          )
+          .value
+          .trim(),
 
         image: null,
 
@@ -913,26 +915,73 @@ function displayRecipe() {
 
     }
 
+    // ===== INGREDIENTS: Bullet points for lines with numbers/measurements =====
+    const ingredientsContainer = document.getElementById("recipeIngredients");
+    ingredientsContainer.innerHTML = "";
 
-    document
-        .getElementById(
-            "recipeIngredients"
-        )
-        .innerHTML =
-        recipe.ingredients
-        .map(
-            item =>
-                `<li>${escapeHTML(item)}</li>`
-        )
-        .join("");
+    if (recipe.ingredients && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0) {
+        recipe.ingredients.forEach(item => {
+            const trimmed = String(item).trim();
+            if (trimmed === "") return;
+
+            // Check for ANY number (not just at start), or measurement words
+            const hasNumber = /\d/.test(trimmed);
+            const hasMeasurement = /tbsp|cup|tsp|g|ml|oz|lb|kg|gram|ounce|pound|packet|stick/i.test(trimmed);
+
+            // Check if it's a section header (like "For the dough", "For the glaze")
+            const isSectionHeader = /^for the /i.test(trimmed);
+
+            // Check if it's a measurement with parentheses like "(280g)" or "(1 packet / 7g)"
+            const hasParenthesisMeasurement = /\([\d\s\/]+(g|tbsp|tsp|cup|packet|stick|oz|ml)/i.test(trimmed);
+
+            // Check if it has a fraction like ⅓, ½, ¼
+            const hasFraction = /[½¼⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞]/.test(trimmed);
+
+            // Should have bullet if it has any number OR measurement OR fraction
+            const shouldHaveBullet = (hasNumber || hasMeasurement || hasParenthesisMeasurement || hasFraction) && !isSectionHeader;
+
+            if (shouldHaveBullet) {
+                const li = document.createElement("li");
+                li.textContent = trimmed;
+                ingredientsContainer.appendChild(li);
+            } else {
+                const p = document.createElement("p");
+                p.textContent = trimmed;
+                p.style.margin = "4px 0";
+                p.style.padding = "2px 0";
+                if (isSectionHeader) {
+                    p.style.fontWeight = "bold";
+                }
+                ingredientsContainer.appendChild(p);
+            }
+        });
+    } else {
+        ingredientsContainer.innerHTML = "";
+    }
 
 
-    document
-        .getElementById(
-            "recipeInstructions"
-        )
-        .innerText =
-        recipe.instructions;
+    // ===== INSTRUCTIONS: NO bullet points, just plain text =====
+    const instructionsContainer = document.getElementById("recipeInstructions");
+    instructionsContainer.innerHTML = "";
+
+    if (recipe.instructions) {
+        const instructionLines = String(recipe.instructions)
+            .split("\n")
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
+
+        if (instructionLines.length > 0) {
+            instructionLines.forEach(line => {
+                const p = document.createElement("p");
+                p.textContent = line;
+                p.style.margin = "4px 0";
+                p.style.padding = "2px 0";
+                instructionsContainer.appendChild(p);
+            });
+        } else {
+            instructionsContainer.textContent = recipe.instructions;
+        }
+    }
 
     document
         .getElementById(
@@ -963,8 +1012,8 @@ function displayRecipe() {
             recipe.url;
 
         url.innerText =
-            recipe.sourceName ||
-            recipe.url;
+           recipe.sourceName ||
+           recipe.url;
 
         url.style.display =
             "inline-block";
@@ -1214,11 +1263,9 @@ function editCurrentRecipe() {
         .value =
         recipe.url || "";
 
-    document
-        .getElementById(
-            "inputSourceName"
-        )
-        .value =
+   document
+       .getElementById("inputSourceName")
+       .value =
         recipe.sourceName || "";
 
     document
@@ -1302,20 +1349,17 @@ function updateRecipe(
                 document
                 .getElementById(
                     "inputURL"
-                    )
-                    .value
-                    .trim();
+                )
+                .value
+                .trim();
 
             recipe.sourceName =
-                document
-                .getElementById(
-                    "inputSourceName"
-                    )
-                    .value
-                    .trim();
-
-
-
+               document
+               .getElementById(
+                 "inputSourceName"
+               )
+               .value
+               .trim();
 
             recipe.ingredients =
                 document
@@ -1496,10 +1540,10 @@ function clearForm() {
         .value = "";
 
     document
-        .getElementById(
-            "inputSourceName"
-        )
-        .value = "";
+       .getElementById(
+           "inputSourceName"
+       )
+       .value = "";
 
     document
         .getElementById(
