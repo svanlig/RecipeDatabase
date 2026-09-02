@@ -418,6 +418,7 @@ main {
 
 #recipeNotes {
     min-height: 50px;
+    background: #e8c05e;
 
     font-family: "Borel", sans-serif;
     font-size: .9rem;
