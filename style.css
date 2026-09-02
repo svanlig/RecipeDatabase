@@ -451,8 +451,8 @@ main {
 
 
 .source {
-    font-family: "Didact Gothic", sans-serif;
-    font-size: .72rem;
+    font-family: "Cutive Mono", sans-serif;
+    font-size: 1.25rem;
 
     letter-spacing: .5px;
 
@@ -470,7 +470,7 @@ main {
 
     color: #333;
 
-    font-family: "Nanum Pen Script", cursive;
+    font-family: "Cutive Mono", cursive;
     font-size: 1.25rem;
 
     letter-spacing: normal;
