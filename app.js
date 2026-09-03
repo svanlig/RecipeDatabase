@@ -270,7 +270,7 @@ async function importPDF() {
         if (data.error) {
 
             status.innerText =
-               status.innerText = data.error.replace('RecipeNest', 'Recipe Database');
+               status.innerText = data.error;
 
             return;
 
