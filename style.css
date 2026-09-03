@@ -550,7 +550,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    font-family: 'Aboreto', sans-serif;
     gap: 8px;
 }
 
