@@ -506,7 +506,7 @@ main {
 
 
 .small-heading {
-    font-family: "Josefin Slab", serif;
+    font-family: "Aboreto", serif;
     font-size: .9rem;
     font-weight: 700;
 
@@ -518,7 +518,7 @@ main {
 .search-container h2 {
     margin: 7px 0;
 
-    font-family: "Josefin Slab", serif;
+    font-family: "Aboreto", serif;
     font-size: 2.3rem;
 }
 
@@ -561,7 +561,7 @@ main {
 
 
 .method-icon {
-    font-family: "Josefin Slab", serif;
+    font-family: "Aboreto", serif;
     font-size: 1.8rem;
     font-weight: 700;
 }
@@ -582,7 +582,7 @@ label {
     margin-top: 18px;
     margin-bottom: 6px;
 
-    font-family: "Didact Gothic", sans-serif;
+    font-family: "Aboreto", sans-serif;
     font-weight: 600;
 }
 
@@ -600,7 +600,7 @@ textarea {
 
     color: #333;
 
-    font-family: "Barlow", sans-serif;
+    font-family: "Aboreto", sans-serif;
 }
 
 
@@ -622,7 +622,7 @@ textarea {
 
     color: #fff;
 
-    font-family: "Josefin Slab", serif;
+    font-family: "Aboreto", serif;
     font-size: 1rem;
     font-weight: 700;
 
@@ -657,13 +657,13 @@ textarea {
 .search-result strong {
     display: block;
 
-    font-family: "Josefin Slab", serif;
+    font-family: "Aboreto", serif;
     font-size: 1.2rem;
 }
 
 
 .search-result small {
-    font-family: "Didact Gothic", sans-serif;
+    font-family: "Aboreto", sans-serif;
 }
 
 
