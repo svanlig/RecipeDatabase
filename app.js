@@ -321,7 +321,7 @@ async function importPDF() {
     catch(error) {
 
         status.innerText =
-            "Could not connect to RecipeNest.";
+            "Could not connect to RecipeDatabase.";
 
         console.error(error);
 
@@ -488,7 +488,7 @@ async function importWebsite() {
         console.error(error);
 
         status.innerText =
-            "Could not connect to RecipeNest. Make sure Flask is running.";
+            "Could not connect to RecipeDatabase. Make sure Flask is running.";
 
     }
 
