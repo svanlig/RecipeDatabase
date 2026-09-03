@@ -270,7 +270,7 @@ async function importPDF() {
         if (data.error) {
 
             status.innerText =
-               'Recipe could not be loaded. The website may block automated access, or RecipeDatabase may not be able to find the recipe information on this page. You can still add it manually.';
+               status.innerText = data.error.replace('RecipeNest', 'Recipe Database');
 
             return;
 
