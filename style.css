@@ -773,7 +773,14 @@ textarea {
     body {
         background: white;
     }
-
+ 
+   .recipe-story,
+    #recipeNotes {
+        background: #e8c05e !important;
+        
+       -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
 
     .site-header,
     .main-nav,
