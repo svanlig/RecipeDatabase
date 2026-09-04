@@ -1598,3 +1598,86 @@ function escapeHTML(
     return div.innerHTML;
 
 }
+
+/* =========================================
+   BACKUP RECIPES
+========================================= */
+
+function exportRecipes() {
+
+    if (recipes.length === 0) {
+
+        alert("There are no recipes to back up.");
+
+        return;
+
+    }
+
+    const backup = {
+
+        app: "Recipe Database",
+
+        exportedAt:
+            new Date().toISOString(),
+
+        recipes: recipes
+
+    };
+
+
+    const json =
+        JSON.stringify(
+            backup,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type: "application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        "recipe-database-backup.json";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+
+    alert(
+        "Your recipe backup has been downloaded."
+    );
+
+}
