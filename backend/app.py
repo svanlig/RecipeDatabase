@@ -13,6 +13,15 @@ app = Flask(__name__)
 
 CORS(app)
 
+# === SERVE HTML ===
+@app.route('/')
+def serve_index():
+    return send_from_directory('../recipedatabase', 'index.html')
+
+@app.route('/<path:filename>')
+def serve_static_files(filename):
+    return send_from_directory('../recipedatabase', filename)
+
 
 # =========================================
 # HOME
@@ -22,7 +31,7 @@ CORS(app)
 def home():
 
     return jsonify({
-        "status": "RecipeNest backend is running!"
+        "status": "RecipeDatabase backend is running!"
     })
 
 
