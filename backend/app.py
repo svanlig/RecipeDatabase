@@ -7,32 +7,20 @@ from pypdf import PdfReader
 
 import json
 import io
-import os
+
 
 app = Flask(__name__)
 
 CORS(app)
-
 @app.route('/')
 def serve_index():
-    # Try multiple paths
-    if os.path.exists('index.html'):
-        return send_from_directory('.', 'index.html')
-    elif os.path.exists('../index.html'):
-        return send_from_directory('..', 'index.html')
-    elif os.path.exists('../recipedatabase/index.html'):
-        return send_from_directory('../recipedatabase', 'index.html')
-    else:
-        return "index.html not found!", 404
+    # Just try to serve from the parent directory
+    return send_from_directory('..', 'index.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
-    if os.path.exists(filename):
-        return send_from_directory('.', filename)
-    elif os.path.exists(f'../{filename}'):
-        return send_from_directory('..', filename)
-    else:
-        return f"{filename} not found!", 404
+    return send_from_directory('..', filename)
+
 
 # =========================================
 # HOME
