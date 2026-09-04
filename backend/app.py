@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 
 import requests
@@ -13,15 +13,26 @@ app = Flask(__name__)
 
 CORS(app)
 
-# === SERVE HTML ===
 @app.route('/')
 def serve_index():
-    return send_from_directory('../recipedatabase', 'index.html')
+    # Try multiple paths
+    if os.path.exists('index.html'):
+        return send_from_directory('.', 'index.html')
+    elif os.path.exists('../index.html'):
+        return send_from_directory('..', 'index.html')
+    elif os.path.exists('../recipedatabase/index.html'):
+        return send_from_directory('../recipedatabase', 'index.html')
+    else:
+        return "index.html not found!", 404
 
 @app.route('/<path:filename>')
-def serve_static_files(filename):
-    return send_from_directory('../recipedatabase', filename)
-
+def serve_static(filename):
+    if os.path.exists(filename):
+        return send_from_directory('.', filename)
+    elif os.path.exists(f'../{filename}'):
+        return send_from_directory('..', filename)
+    else:
+        return f"{filename} not found!", 404
 
 # =========================================
 # HOME
