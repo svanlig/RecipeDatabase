@@ -723,6 +723,13 @@ textarea {
         padding: 22px;
     }
 
+   .logo {
+       font-size: 2.2rem;
+   }
+
+   .tagline {
+       font-size: 1.35rem;
+   }
 }
 
 
