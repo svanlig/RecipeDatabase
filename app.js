@@ -1681,3 +1681,146 @@ function exportRecipes() {
     );
 
 }
+
+/* =========================================
+   RESTORE RECIPES
+========================================= */
+
+function importRecipes(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e) {
+
+            try {
+
+                const backup =
+                    JSON.parse(
+                        e.target.result
+                    );
+
+
+                if (
+                    !backup.recipes ||
+                    !Array.isArray(
+                        backup.recipes
+                    )
+                ) {
+
+                    alert(
+                        "This does not appear to be a valid Recipe Database backup."
+                    );
+
+                    return;
+
+                }
+
+
+                if (
+                    !confirm(
+                        `Restore ${backup.recipes.length} recipes?\n\nExisting recipes will be kept.`
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                const transaction =
+                    db.transaction(
+                        ["recipes"],
+                        "readwrite"
+                    );
+
+
+                const store =
+                    transaction.objectStore(
+                        "recipes"
+                    );
+
+
+                backup.recipes.forEach(
+                    recipe => {
+
+                        /*
+                         * Remove the old ID so IndexedDB
+                         * creates a new one if needed.
+                         */
+
+                        const restoredRecipe =
+                            {
+                                ...recipe
+                            };
+
+
+                        delete restoredRecipe.id;
+
+
+                        store.add(
+                            restoredRecipe
+                        );
+
+                    }
+                );
+
+
+                transaction.oncomplete =
+                    function() {
+
+                        loadRecipes();
+
+
+                        alert(
+                            `${backup.recipes.length} recipes restored successfully.`
+                        );
+
+
+                        event.target.value =
+                            "";
+
+                    };
+
+
+                transaction.onerror =
+                    function() {
+
+                        alert(
+                            "There was a problem restoring the recipes."
+                        );
+
+                    };
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+
+                alert(
+                    "Could not read this backup file."
+                );
+
+            }
+
+        };
+
+
+    reader.readAsText(file);
+
+}
