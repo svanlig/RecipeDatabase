@@ -85,6 +85,16 @@
         <button onclick="exportRecipes()">
             Backup Recipes
         </button>
+        <input
+            type="file"
+            id="restoreFile"
+            accept=".json"
+            style="display: none;"
+            onchange="importRecipes(event)">
+
+        <button onclick="document.getElementById('restoreFile').click()">
+                Restore Backup
+        </button>
     </div>
 
 
