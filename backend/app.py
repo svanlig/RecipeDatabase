@@ -811,7 +811,7 @@ def test_supabase():
 
         result = (
             supabase
-            .table("recipes")
+            .table("Recipe")
             .select("*")
             .limit(1)
             .execute()
