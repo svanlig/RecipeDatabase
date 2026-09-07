@@ -839,6 +839,43 @@ def test_supabase():
             "success": False,
             "error": str(error)
         }), 500
+
+@app.route("/save-recipe", methods=["POST"])
+def save_recipe():
+
+    try:
+
+        recipe = request.get_json()
+
+        if not recipe:
+            return jsonify({
+                "success": False,
+                "error": "No recipe data received."
+            }), 400
+
+        result = (
+            supabase
+            .table("Recipe")
+            .insert({
+                "data": recipe
+            })
+            .execute()
+        )
+
+        return jsonify({
+            "success": True,
+            "message": "Recipe saved to Supabase!",
+            "data": result.data
+        })
+
+    except Exception as error:
+
+        print(error)
+
+        return jsonify({
+            "success": False,
+            "error": str(error)
+        }), 500
 # =========================================
 # START SERVER
 # =========================================
