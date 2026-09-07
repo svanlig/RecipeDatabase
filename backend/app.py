@@ -18,12 +18,12 @@ CORS(app)
 # SUPABASE
 # =========================================
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL")
+_URL = os.environ.get("_URL")
 SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY")
 
-supabase = create_client(
-    SUPABASE_URL,
-    SUPABASE_SECRET_KEY
+ = create_client(
+    _URL,
+    _SECRET_KEY
 )
 @app.route('/')
 def serve_index():
@@ -804,8 +804,8 @@ def parse_instructions(items):
 
     return result
 
-@app.route("/test-supabase", methods=["GET"])
-def test_supabase():
+@app.route("/test-", methods=["GET"])
+def test_():
 
     try:
 
@@ -886,7 +886,6 @@ def get_recipe():
             supabase
             .table("Recipe")
             .select("*")
-            .limit(1)
             .execute()
         )
 
