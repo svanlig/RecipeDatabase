@@ -18,7 +18,7 @@ CORS(app)
 # SUPABASE
 # =========================================
 
-SUPABASE_URL = os.environ.get("_URL")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY")
 
 supabase = create_client(
