@@ -7,11 +7,24 @@ from pypdf import PdfReader
 
 import json
 import io
+import os
+from supabase import create_client
 
 
 app = Flask(__name__)
 
 CORS(app)
+# =========================================
+# SUPABASE
+# =========================================
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY")
+
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_SECRET_KEY
+)
 @app.route('/')
 def serve_index():
     # Just try to serve from the parent directory
@@ -790,6 +803,34 @@ def parse_instructions(items):
 
 
     return result
+
+@app.route("/test-supabase", methods=["GET"])
+def test_supabase():
+
+    try:
+
+        result = (
+            supabase
+            .table("recipes")
+            .select("*")
+            .limit(1)
+            .execute()
+        )
+
+        return jsonify({
+            "success": True,
+            "message": "Supabase connection works!",
+            "data": result.data
+        })
+
+    except Exception as error:
+
+        print(error)
+
+        return jsonify({
+            "success": False,
+            "error": str(error)
+        }), 500
 # =========================================
 # START SERVER
 # =========================================
