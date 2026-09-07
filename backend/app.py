@@ -876,6 +876,34 @@ def save_recipe():
             "success": False,
             "error": str(error)
         }), 500
+
+@app.route("/get-recipe", methods=["GET"])
+def get_recipe():
+
+    try:
+
+        result = (
+            supabase
+            .table("Recipe")
+            .select("*")
+            .limit(1)
+            .execute()
+        )
+
+        return jsonify({
+            "success": True,
+            "data": result.data
+        })
+
+    except Exception as error:
+
+        print(error)
+
+        return jsonify({
+            "success": False,
+            "error": str(error)
+        }), 500
+
 # =========================================
 # START SERVER
 # =========================================
