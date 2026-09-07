@@ -761,9 +761,7 @@ function saveRecipe() {
    DATABASE ADD
 ========================================= */
 
-function addRecipeToDatabase(
-    recipe
-) {
+function addRecipeToDatabase(recipe) {
 
     const transaction =
         db.transaction(
@@ -771,19 +769,54 @@ function addRecipeToDatabase(
             "readwrite"
         );
 
-
     const store =
         transaction.objectStore(
             "recipes"
         );
 
-
     const request =
         store.add(recipe);
 
-
     request.onsuccess =
-        function() {
+        async function() {
+
+            // Save a copy to Supabase
+            try {
+
+                const response =
+                    await fetch(
+                        "/save-recipe",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(recipe)
+                        }
+                    );
+
+                const result =
+                    await response.json();
+
+                console.log(
+                    "Supabase result:",
+                    result
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Supabase save failed:",
+                    error
+                );
+
+            }
 
             editingId = null;
 
@@ -800,7 +833,6 @@ function addRecipeToDatabase(
         };
 
 }
-
 
 /* =========================================
    DISPLAY
