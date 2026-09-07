@@ -1856,3 +1856,16 @@ function importRecipes(event) {
     reader.readAsText(file);
 
 }
+async function testCloudRecipes() {
+    try {
+        const response = await fetch("/get-recipe");
+        const result = await response.json();
+
+        console.log("Recipes from Supabase:", result);
+
+    } catch (error) {
+        console.error("Cloud recipe test failed:", error);
+    }
+}
+
+testCloudRecipes();
