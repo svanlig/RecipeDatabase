@@ -18,12 +18,12 @@ CORS(app)
 # SUPABASE
 # =========================================
 
-_URL = os.environ.get("_URL")
+SUPABASE_URL = os.environ.get("_URL")
 SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY")
 
- supabase = create_client(
-    _URL,
-    _SECRET_KEY
+supabase = create_client(
+    SUPABASE_URL,
+    SUPABASE_SECRET_KEY
 )
 @app.route('/')
 def serve_index():
