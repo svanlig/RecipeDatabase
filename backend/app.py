@@ -809,17 +809,25 @@ def test_supabase():
 
     try:
 
+        test_recipe = {
+            "data": {
+                "name": "Test Recipe",
+                "category": "Test",
+                "ingredients": ["1 cup flour"],
+                "instructions": "Mix and bake."
+            }
+        }
+
         result = (
             supabase
             .table("Recipe")
-            .select("*")
-            .limit(1)
+            .insert(test_recipe)
             .execute()
         )
 
         return jsonify({
             "success": True,
-            "message": "Supabase connection works!",
+            "message": "Test recipe was added!",
             "data": result.data
         })
 
