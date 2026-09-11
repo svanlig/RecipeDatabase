@@ -54,6 +54,47 @@
     <button onclick="showSearch()">
         Find Recipe
     </button>
+    
+    <div class="menu-wrap">
+
+        <button
+            id="mainMenuButton"
+            type="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            title="More options"
+            onclick="toggleMainMenu(event)">
+
+            &#8942;
+
+        </button>
+
+        <div
+            id="mainMenu"
+            class="menu-popup hidden"
+            role="menu">
+
+            <button
+                type="button"
+                role="menuitem"
+                onclick="menuBackupRestore()">
+
+                Backup / Restore
+
+            </button>
+
+            <button
+                type="button"
+                role="menuitem"
+                onclick="menuMakeCookbook()">
+
+                Make a Cookbook
+
+            </button>
+
+        </div>
+
+    </div>
 
 </nav>
 
