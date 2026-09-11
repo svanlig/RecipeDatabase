@@ -804,3 +804,53 @@ textarea {
     }
 
 }
+.tag-filter-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.tag-filter-wrap input {
+    padding-right: 28px;
+}
+
+.tag-filter-clear {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 4px;
+    opacity: 0.6;
+}
+
+.tag-filter-clear:hover {
+    opacity: 1;
+}
+
+.tag-filter-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 20;
+    text-align: left;
+}
+
+.tag-filter-suggestions .tag-suggestion {
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.95em;
+}
+
+.tag-filter-suggestions .tag-suggestion:hover,
+.tag-filter-suggestions .tag-suggestion.active {
+    background: #f0f0f0;
+}
