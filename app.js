@@ -89,8 +89,12 @@ function loadRecipes() {
 
             recipes =
                 request.result;
+           
+           populateTagSuggestions();
 
-            displayRecipe();
+           populateTagFilter();
+
+           displayRecipe();
 
         };
 
