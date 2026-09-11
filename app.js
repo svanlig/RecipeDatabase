@@ -1583,7 +1583,7 @@ function searchRecipes() {
 
 
                 const tagMatch =
-                    tag === "All" ||
+                    tag === "" ||
                     (recipe.tags || [])
                     .includes(tag);
 
