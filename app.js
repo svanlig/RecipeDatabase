@@ -850,7 +850,12 @@ function displayRecipe() {
             .innerText =
             "Add your first recipe.";
 
-
+         document
+            .getElementById(
+                "recipeCategory"
+            )
+            .innerText = "";
+       
         document
             .getElementById(
                 "pageNumber"
