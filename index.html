@@ -569,6 +569,28 @@
         Paste the link to a recipe page. RecipeDatabase will try to
         extract the recipe for you.
     </p>
+            
+    <label>
+        Search for a recipe
+    </label>
+
+    <input
+        id="googleSearchInput"
+        type="text"
+        placeholder="e.g. chicken tikka masala">
+
+    <button
+        type="button"
+        class="primary-button"
+        onclick="searchGoogleForRecipe()">
+
+        Search Google
+
+    </button>
+
+    <div id="googleSearchStatus"></div>
+
+    <div class="divider"></div>
 
     <label>
         Recipe URL
