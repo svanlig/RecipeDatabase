@@ -1351,6 +1351,15 @@ function updateRecipe(
                     "inputCategory"
                 )
                 .value;
+           
+            recipe.tags =
+                parseTagsInput(
+                    document
+                    .getElementById(
+                        "inputTags"
+                    )
+                    .value
+                );
 
             recipe.story =
                 document
