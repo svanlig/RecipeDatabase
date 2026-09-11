@@ -582,6 +582,245 @@ function showURLImport() {
         .classList.add("hidden");
 
 }
+/* =========================================
+   MAIN MENU (three-dot)
+========================================= */
+
+function toggleMainMenu(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const menu =
+        document
+        .getElementById(
+            "mainMenu"
+        );
+
+    const trigger =
+        document
+        .getElementById(
+            "mainMenuButton"
+        );
+
+    if (!menu) return;
+
+    const isHidden =
+        menu.classList.contains(
+            "hidden"
+        );
+
+    if (isHidden) {
+
+        menu.classList.remove(
+            "hidden"
+        );
+
+        if (trigger) {
+
+            trigger.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+        }
+
+    }
+
+    else {
+
+        closeMainMenu();
+
+    }
+
+}
+
+
+function closeMainMenu() {
+
+    const menu =
+        document
+        .getElementById(
+            "mainMenu"
+        );
+
+    const trigger =
+        document
+        .getElementById(
+            "mainMenuButton"
+        );
+
+    if (menu) {
+
+        menu.classList.add(
+            "hidden"
+        );
+
+    }
+
+    if (trigger) {
+
+        trigger.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+
+/* Close the menu when clicking outside it */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const wrap =
+            document.querySelector(
+                ".menu-wrap"
+            );
+
+        if (!wrap) return;
+
+        if (!wrap.contains(event.target)) {
+
+            closeMainMenu();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MENU ACTIONS
+========================================= */
+
+function menuBackupRestore() {
+
+    /*
+     * Close the three-dot menu itself,
+     * then show a second small menu
+     * with three clear choices.
+     */
+
+    closeMainMenu();
+
+
+    const popup =
+        document
+        .getElementById(
+            "backupRestorePopup"
+        );
+
+    if (!popup) return;
+
+
+    popup.classList.remove(
+        "hidden"
+    );
+
+
+    /* Give the user a way out if they
+       click somewhere else on the page. */
+
+    setTimeout(
+        function() {
+
+            document.addEventListener(
+                "click",
+                closeBackupRestorePopupOnce
+            );
+
+        },
+        0
+    );
+
+}
+
+
+function closeBackupRestorePopup() {
+
+    const popup =
+        document
+        .getElementById(
+            "backupRestorePopup"
+        );
+
+    if (popup) {
+
+        popup.classList.add(
+            "hidden"
+        );
+
+    }
+
+    document.removeEventListener(
+        "click",
+        closeBackupRestorePopupOnce
+    );
+
+}
+
+
+function closeBackupRestorePopupOnce(event) {
+
+    const popup =
+        document
+        .getElementById(
+            "backupRestorePopup"
+        );
+
+    if (!popup) return;
+
+    if (!popup.contains(event.target)) {
+
+        closeBackupRestorePopup();
+
+    }
+
+}
+
+
+function backupRestoreBackup() {
+
+    closeBackupRestorePopup();
+
+    exportRecipes();
+
+}
+
+
+function backupRestoreRestore() {
+
+    closeBackupRestorePopup();
+
+    const fileInput =
+        document
+        .getElementById(
+            "restoreFile"
+        );
+
+    if (fileInput) {
+
+        fileInput.click();
+
+    }
+
+}
+
+
+function menuMakeCookbook() {
+
+    closeMainMenu();
+
+    alert(
+        "Cookbook creation coming soon."
+    );
+
+}
 
 
 /* =========================================
