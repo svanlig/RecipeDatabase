@@ -1565,12 +1565,7 @@ function searchRecipes() {
 
 
    const tag =
-        document
-        .getElementById(
-            "tagFilter"
-        )
-        .value;
-
+        selectedTag;
 
     const results =
         recipes.filter(
