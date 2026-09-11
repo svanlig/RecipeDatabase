@@ -854,3 +854,44 @@ textarea {
 .tag-filter-suggestions .tag-suggestion.active {
     background: #f0f0f0;
 }
+
+.menu-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.menu-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    background: #f7f6f2;
+    border: 1px solid #555;
+
+    min-width: 180px;
+    z-index: 50;
+
+    text-align: left;
+}
+
+.menu-popup button {
+    display: block;
+    width: 100%;
+
+    background: none;
+    border: none;
+
+    padding: 8px 12px;
+
+    text-align: left;
+    cursor: pointer;
+
+    font-family: "Aboreto", sans-serif;
+    font-size: .85rem;
+    color: #333;
+}
+
+.menu-popup button:hover {
+    background: #dedbd5;
+}
