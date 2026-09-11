@@ -140,14 +140,17 @@
 
             <!-- TITLE -->
 
-            <div class="title-section">
+                       <div class="title-section">
 
                 <h1 id="recipeTitle">
                     Your Recipe Database
                 </h1>
 
-            </div>
+                <div id="recipeTags"
+                     class="recipe-tags">
+                </div>
 
+            </div>
 
 
             <div class="double-rule"></div>
@@ -460,6 +463,18 @@
 
 
             <label>
+                Tags
+            </label>
+
+            <input id="inputTags"
+                   type="text"
+                   list="tagSuggestions"
+                   placeholder="Comma separated, e.g. Korean, Chicken, Spicy, Quick">
+
+            <datalist id="tagSuggestions"></datalist>
+
+
+            <label>
                 Recipe Story
             </label>
 
@@ -631,6 +646,16 @@
             <option>Drinks</option>
 
             <option>Family Heirlooms</option>
+
+        </select>
+        
+        <select
+            id="tagFilter"
+            onchange="searchRecipes()">
+
+            <option value="All">
+                All Tags
+            </option>
 
         </select>
 

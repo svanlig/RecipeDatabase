@@ -89,13 +89,176 @@ function loadRecipes() {
 
             recipes =
                 request.result;
+           
+           populateTagSuggestions();
 
-            displayRecipe();
+           populateTagFilter();
+
+           displayRecipe();
 
         };
 
 }
+/* =========================================
+   TAGS HELPERS
+========================================= */
 
+function parseTagsInput(value) {
+
+    const seen = new Set();
+
+    return String(value || "")
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(tag => tag !== "")
+        .filter(tag => {
+
+            const key = tag.toLowerCase();
+
+            if (seen.has(key)) {
+                return false;
+            }
+
+            seen.add(key);
+            return true;
+
+        });
+
+}
+
+
+function populateTagSuggestions() {
+
+    const datalist =
+        document
+        .getElementById(
+            "tagSuggestions"
+        );
+
+    if (!datalist) return;
+
+    datalist.innerHTML = "";
+
+    const unique =
+        new Set();
+
+    recipes.forEach(
+        recipe => {
+
+            (recipe.tags || [])
+                .forEach(
+                    tag =>
+                        unique.add(tag)
+                );
+
+        }
+    );
+
+    Array.from(unique)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        )
+        .forEach(
+            tag => {
+
+                const option =
+                    document
+                    .createElement(
+                        "option"
+                    );
+
+                option.value =
+                    tag;
+
+                datalist
+                    .appendChild(
+                        option
+                    );
+
+            }
+        );
+
+}
+
+
+function populateTagFilter() {
+
+    const select =
+        document
+        .getElementById(
+            "tagFilter"
+        );
+
+    if (!select) return;
+
+    const previous =
+        select.value;
+
+    select.innerHTML =
+        '<option value="All">All Tags</option>';
+
+    const unique =
+        new Set();
+
+    recipes.forEach(
+        recipe => {
+
+            (recipe.tags || [])
+                .forEach(
+                    tag =>
+                        unique.add(tag)
+                );
+
+        }
+    );
+
+    Array.from(unique)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        )
+        .forEach(
+            tag => {
+
+                const option =
+                    document
+                    .createElement(
+                        "option"
+                    );
+
+                option.value =
+                    tag;
+
+                option.textContent =
+                    tag;
+
+                select
+                    .appendChild(
+                        option
+                    );
+
+            }
+        );
+
+    /* Preserve the user's current filter
+       selection if it still exists. */
+
+    if (
+        previous &&
+        Array.from(select.options)
+            .some(
+                opt =>
+                    opt.value === previous
+            )
+    ) {
+
+        select.value =
+            previous;
+
+    }
+
+}
 
 /* =========================================
    NAVIGATION
@@ -680,6 +843,15 @@ function saveRecipe() {
                 "inputCategory"
             )
             .value,
+      
+       tags:
+           parseTagsInput(
+           document
+           .getElementById(
+               "inputTags"
+            )
+            .value
+            ),
 
         url:
             document
@@ -857,7 +1029,7 @@ function displayRecipe() {
                 "recipeCategory"
             )
             .innerText = "";
-
+       
 
         document
             .getElementById(
@@ -873,7 +1045,12 @@ function displayRecipe() {
             .innerText =
             "Add your first recipe.";
 
-
+         document
+            .getElementById(
+                "recipeCategory"
+            )
+            .innerText = "";
+       
         document
             .getElementById(
                 "pageNumber"
@@ -906,6 +1083,34 @@ function displayRecipe() {
         .innerText =
         recipe.category;
 
+    const recipeTags =
+        document
+        .getElementById(
+            "recipeTags"
+        );
+
+    recipeTags.innerHTML = "";
+
+    (recipe.tags || [])
+        .forEach(
+            function(tag) {
+
+                const span =
+                    document
+                    .createElement(
+                        "span"
+                    );
+
+                span.textContent =
+                    tag;
+
+                recipeTags
+                    .appendChild(
+                        span
+                    );
+
+            }
+        );
 
     document
         .getElementById(
@@ -1148,6 +1353,14 @@ function searchRecipes() {
         .value;
 
 
+   const tag =
+        document
+        .getElementById(
+            "tagFilter"
+        )
+        .value;
+
+
     const results =
         recipes.filter(
             recipe => {
@@ -1163,14 +1376,20 @@ function searchRecipes() {
                     recipe.category === category;
 
 
+                const tagMatch =
+                    tag === "All" ||
+                    (recipe.tags || [])
+                    .includes(tag);
+
+
                 return (
                     nameMatch &&
-                    categoryMatch
+                    categoryMatch &&
+                    tagMatch
                 );
 
             }
         );
-
 
     const container =
         document
@@ -1283,6 +1502,12 @@ function editCurrentRecipe() {
         recipe.category || "Breakfast";
 
     document
+        .getElementById("inputTags")
+        .value =
+        (recipe.tags || [])
+            .join(", ");
+   
+    document
         .getElementById(
             "inputStory"
         )
@@ -1368,6 +1593,15 @@ function updateRecipe(
                     "inputCategory"
                 )
                 .value;
+           
+            recipe.tags =
+                parseTagsInput(
+                    document
+                    .getElementById(
+                        "inputTags"
+                    )
+                    .value
+                );
 
             recipe.story =
                 document
@@ -1577,6 +1811,12 @@ function clearForm() {
        )
        .value = "";
 
+    document
+       .getElementById(
+           "inputTags"
+       )
+       .value = "";
+   
     document
         .getElementById(
             "inputIngredients"
