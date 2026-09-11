@@ -1570,6 +1570,12 @@ function clearForm() {
        .value = "";
 
     document
+       .getElementById(
+           "inputTags"
+       )
+       .value = "";
+   
+    document
         .getElementById(
             "inputIngredients"
         )
