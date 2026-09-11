@@ -1260,6 +1260,12 @@ function editCurrentRecipe() {
         recipe.category || "Breakfast";
 
     document
+        .getElementById("inputTags")
+        .value =
+        (recipe.tags || [])
+            .join(", ");
+   
+    document
         .getElementById(
             "inputStory"
         )
