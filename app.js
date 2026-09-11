@@ -1158,6 +1158,14 @@ function searchRecipes() {
         .value;
 
 
+   const tag =
+        document
+        .getElementById(
+            "tagFilter"
+        )
+        .value;
+
+
     const results =
         recipes.filter(
             recipe => {
@@ -1173,14 +1181,20 @@ function searchRecipes() {
                     recipe.category === category;
 
 
+                const tagMatch =
+                    tag === "All" ||
+                    (recipe.tags || [])
+                    .includes(tag);
+
+
                 return (
                     nameMatch &&
-                    categoryMatch
+                    categoryMatch &&
+                    tagMatch
                 );
 
             }
         );
-
 
     const container =
         document
