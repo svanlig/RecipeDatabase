@@ -184,19 +184,44 @@ function populateTagSuggestions() {
 
 function populateTagFilter() {
 
-    const select =
+    /*
+     * The tag filter is now a text input
+     * with autocomplete suggestions, so
+     * there is no <select> to populate.
+     *
+     * We still keep this function name so
+     * loadRecipes() can call it, and so we
+     * can refresh an open suggestion list
+     * if the underlying tags change.
+     */
+
+    const input =
         document
         .getElementById(
-            "tagFilter"
+            "tagFilterInput"
         );
 
-    if (!select) return;
+    if (!input) return;
 
-    const previous =
-        select.value;
+    if (
+        document.activeElement === input
+    ) {
 
-    select.innerHTML =
-        '<option value="All">All Tags</option>';
+        onTagFilterInput();
+
+    }
+
+}
+
+
+/* =========================================
+   TAG FILTER (search page)
+========================================= */
+
+let selectedTag = "";
+
+
+function getAllTags() {
 
     const unique =
         new Set();
@@ -213,53 +238,239 @@ function populateTagFilter() {
         }
     );
 
-    Array.from(unique)
+    return Array.from(unique)
         .sort(
             (a, b) =>
                 a.localeCompare(b)
-        )
-        .forEach(
+        );
+
+}
+
+
+function onTagFilterInput() {
+
+    const input =
+        document
+        .getElementById(
+            "tagFilterInput"
+        );
+
+    const box =
+        document
+        .getElementById(
+            "tagFilterSuggestions"
+        );
+
+    if (!input || !box) return;
+
+    const query =
+        input.value
+        .trim()
+        .toLowerCase();
+
+    /*
+     * If the user is typing freely, we
+     * treat the input as a loose search
+     * until they pick a suggestion.
+     */
+
+    if (query === "") {
+
+        selectedTag = "";
+
+    }
+
+    else if (
+        query !==
+        selectedTag.toLowerCase()
+    ) {
+
+        selectedTag = "";
+
+    }
+
+    const matches =
+        getAllTags()
+        .filter(
+            tag =>
+                query === "" ||
+                tag
+                .toLowerCase()
+                .includes(query)
+        );
+
+    box.innerHTML = "";
+
+    if (matches.length === 0) {
+
+        box.classList.add("hidden");
+
+    }
+
+    else {
+
+        box.classList.remove("hidden");
+
+        matches.forEach(
             tag => {
 
-                const option =
+                const div =
                     document
                     .createElement(
-                        "option"
+                        "div"
                     );
 
-                option.value =
+                div.className =
+                    "tag-suggestion";
+
+                div.textContent =
                     tag;
 
-                option.textContent =
-                    tag;
+                div.onclick =
+                    function() {
 
-                select
-                    .appendChild(
-                        option
-                    );
+                        selectTagSuggestion(
+                            tag
+                        );
+
+                    };
+
+                box.appendChild(div);
 
             }
         );
 
-    /* Preserve the user's current filter
-       selection if it still exists. */
+    }
 
-    if (
-        previous &&
-        Array.from(select.options)
-            .some(
-                opt =>
-                    opt.value === previous
-            )
-    ) {
+    updateTagClearButton();
 
-        select.value =
-            previous;
+    searchRecipes();
+
+}
+
+
+function selectTagSuggestion(tag) {
+
+    const input =
+        document
+        .getElementById(
+            "tagFilterInput"
+        );
+
+    const box =
+        document
+        .getElementById(
+            "tagFilterSuggestions"
+        );
+
+    if (!input || !box) return;
+
+    selectedTag = tag;
+
+    input.value = tag;
+
+    box.innerHTML = "";
+
+    box.classList.add("hidden");
+
+    updateTagClearButton();
+
+    searchRecipes();
+
+}
+
+
+function clearTagFilter() {
+
+    const input =
+        document
+        .getElementById(
+            "tagFilterInput"
+        );
+
+    const box =
+        document
+        .getElementById(
+            "tagFilterSuggestions"
+        );
+
+    selectedTag = "";
+
+    if (input) input.value = "";
+
+    if (box) {
+
+        box.innerHTML = "";
+
+        box.classList.add("hidden");
+
+    }
+
+    updateTagClearButton();
+
+    searchRecipes();
+
+}
+
+
+function updateTagClearButton() {
+
+    const clearBtn =
+        document
+        .getElementById(
+            "tagFilterClear"
+        );
+
+    const input =
+        document
+        .getElementById(
+            "tagFilterInput"
+        );
+
+    if (!clearBtn || !input) return;
+
+    if (input.value.trim() === "") {
+
+        clearBtn.classList.add("hidden");
+
+    }
+
+    else {
+
+        clearBtn.classList.remove("hidden");
 
     }
 
 }
 
+
+/* Close suggestions when clicking outside */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const wrap =
+            document.querySelector(
+                ".tag-filter-wrap"
+            );
+
+        const box =
+            document
+            .getElementById(
+                "tagFilterSuggestions"
+            );
+
+        if (!wrap || !box) return;
+
+        if (!wrap.contains(event.target)) {
+
+            box.classList.add("hidden");
+
+        }
+
+    }
+);
 /* =========================================
    NAVIGATION
 ========================================= */
