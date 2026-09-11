@@ -867,6 +867,57 @@ async function importWebsite() {
     }
 
 }
+* =========================================
+   GOOGLE RECIPE SEARCH (helper for URL import)
+========================================= */
+
+function searchGoogleForRecipe() {
+
+    const input =
+        document
+        .getElementById(
+            "googleSearchInput"
+        );
+
+    const status =
+        document
+        .getElementById(
+            "googleSearchStatus"
+        );
+
+    if (!input || !status) return;
+
+    const phrase =
+        input.value
+        .trim();
+
+    if (phrase === "") {
+
+        status.innerText =
+            "Type what you're looking for first, e.g. \"Korean beef\".";
+
+        return;
+
+    }
+
+    status.innerText = "";
+
+    const query =
+        encodeURIComponent(
+            phrase + " recipe"
+        );
+
+    window.open(
+        "https://www.google.com/search?q=" + query,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+    status.innerText =
+        "Google opened in a new tab. Find a recipe, copy its URL, then paste it below.";
+
+}
+
 
 
 /* =========================================
