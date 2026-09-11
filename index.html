@@ -649,15 +649,31 @@
 
         </select>
         
-        <select
-            id="tagFilter"
-            onchange="searchRecipes()">
+        <div class="tag-filter-wrap">
 
-            <option value="All">
-                All Tags
-            </option>
+            <input
+                id="tagFilterInput"
+                type="text"
+                placeholder="Search by tag..."
+                autocomplete="off"
+                oninput="onTagFilterInput()"
+                onfocus="onTagFilterInput()">
 
-        </select>
+            <button
+                id="tagFilterClear"
+                type="button"
+                class="tag-filter-clear hidden"
+                onclick="clearTagFilter()"
+                title="Clear tag filter">
+                ×
+            </button>
+
+            <div
+                id="tagFilterSuggestions"
+                class="tag-filter-suggestions hidden">
+            </div>
+
+        </div>
 
 
 
