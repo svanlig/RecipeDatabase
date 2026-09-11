@@ -756,6 +756,45 @@
 <script src="app.js">
 </script>
 
+<div
+    id="backupRestorePopup"
+    class="choice-popup hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Backup / Restore">
+
+    <div class="choice-popup-inner">
+
+        <button
+            type="button"
+            onclick="backupRestoreBackup()">
+
+            Backup Recipes
+
+        </button>
+
+        <button
+            type="button"
+            onclick="backupRestoreRestore()">
+
+            Restore Backup
+
+        </button>
+
+        <button
+            type="button"
+            onclick="closeBackupRestorePopup()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
 
 </body>
 
