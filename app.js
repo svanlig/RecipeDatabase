@@ -680,6 +680,15 @@ function saveRecipe() {
                 "inputCategory"
             )
             .value,
+      
+       tags:
+           parseTagsInput(
+           document
+           .getElementById(
+               "inputTags"
+            )
+            .value
+            ),
 
         url:
             document
