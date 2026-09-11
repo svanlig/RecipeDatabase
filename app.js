@@ -1603,7 +1603,7 @@ function displayRecipe() {
                     );
 
                 span.textContent =
-                    tag;
+                     "#" + tag + "  ";
 
                 recipeTags
                     .appendChild(
