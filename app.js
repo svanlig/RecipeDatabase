@@ -99,7 +99,166 @@ function loadRecipes() {
         };
 
 }
+/* =========================================
+   TAGS HELPERS
+========================================= */
 
+function parseTagsInput(value) {
+
+    const seen = new Set();
+
+    return String(value || "")
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(tag => tag !== "")
+        .filter(tag => {
+
+            const key = tag.toLowerCase();
+
+            if (seen.has(key)) {
+                return false;
+            }
+
+            seen.add(key);
+            return true;
+
+        });
+
+}
+
+
+function populateTagSuggestions() {
+
+    const datalist =
+        document
+        .getElementById(
+            "tagSuggestions"
+        );
+
+    if (!datalist) return;
+
+    datalist.innerHTML = "";
+
+    const unique =
+        new Set();
+
+    recipes.forEach(
+        recipe => {
+
+            (recipe.tags || [])
+                .forEach(
+                    tag =>
+                        unique.add(tag)
+                );
+
+        }
+    );
+
+    Array.from(unique)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        )
+        .forEach(
+            tag => {
+
+                const option =
+                    document
+                    .createElement(
+                        "option"
+                    );
+
+                option.value =
+                    tag;
+
+                datalist
+                    .appendChild(
+                        option
+                    );
+
+            }
+        );
+
+}
+
+
+function populateTagFilter() {
+
+    const select =
+        document
+        .getElementById(
+            "tagFilter"
+        );
+
+    if (!select) return;
+
+    const previous =
+        select.value;
+
+    select.innerHTML =
+        '<option value="All">All Tags</option>';
+
+    const unique =
+        new Set();
+
+    recipes.forEach(
+        recipe => {
+
+            (recipe.tags || [])
+                .forEach(
+                    tag =>
+                        unique.add(tag)
+                );
+
+        }
+    );
+
+    Array.from(unique)
+        .sort(
+            (a, b) =>
+                a.localeCompare(b)
+        )
+        .forEach(
+            tag => {
+
+                const option =
+                    document
+                    .createElement(
+                        "option"
+                    );
+
+                option.value =
+                    tag;
+
+                option.textContent =
+                    tag;
+
+                select
+                    .appendChild(
+                        option
+                    );
+
+            }
+        );
+
+    /* Preserve the user's current filter
+       selection if it still exists. */
+
+    if (
+        previous &&
+        Array.from(select.options)
+            .some(
+                opt =>
+                    opt.value === previous
+            )
+    ) {
+
+        select.value =
+            previous;
+
+    }
+
+}
 
 /* =========================================
    NAVIGATION
