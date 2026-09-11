@@ -834,7 +834,7 @@ function displayRecipe() {
                 "recipeCategory"
             )
             .innerText = "";
-
+       
 
         document
             .getElementById(
@@ -883,6 +883,34 @@ function displayRecipe() {
         .innerText =
         recipe.category;
 
+    const recipeTags =
+        document
+        .getElementById(
+            "recipeTags"
+        );
+
+    recipeTags.innerHTML = "";
+
+    (recipe.tags || [])
+        .forEach(
+            function(tag) {
+
+                const span =
+                    document
+                    .createElement(
+                        "span"
+                    );
+
+                span.textContent =
+                    tag;
+
+                recipeTags
+                    .appendChild(
+                        span
+                    );
+
+            }
+        );
 
     document
         .getElementById(
