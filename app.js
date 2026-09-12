@@ -503,6 +503,11 @@ function showBook() {
     document
         .getElementById("bookPage")
         .classList.remove("hidden");
+    
+   document
+        .querySelector(".site-header")
+        .classList.remove("home-hidden");
+
 
     displayRecipe();
 
