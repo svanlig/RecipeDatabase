@@ -98,6 +98,24 @@ function loadRecipes() {
 
            renderHomePage();
 
+            /*
+             * Show the home page once, on the
+             * very first successful load, after
+             * recipes has been populated.
+             *
+             * Subsequent calls to loadRecipes()
+             * (after save, edit, delete, restore)
+             * must NOT jump the user back to home.
+             */
+
+            if (!startupComplete) {
+
+                startupComplete = true;
+
+                showHome();
+
+            }
+
         };
 
 }
