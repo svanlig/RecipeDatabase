@@ -546,6 +546,140 @@ function showSearch() {
 
 }
 
+/* =========================================
+   HOME PAGE
+========================================= */
+
+function showHome() {
+
+    hideAll();
+
+    document
+        .getElementById("homePage")
+        .classList.remove("hidden");
+
+    document
+        .querySelector(".site-header")
+        .classList.add("home-hidden");
+
+    renderHomePage();
+
+}
+
+
+function openCategory(category) {
+
+    /*
+     * Reuse the existing search page: set
+     * the category filter, clear the free
+     * text and tag filters, then show search.
+     */
+
+    document
+        .getElementById("categoryFilter")
+        .value = category;
+
+    document
+        .getElementById("searchInput")
+        .value = "";
+
+    selectedTag = "";
+
+    const tagInput =
+        document
+        .getElementById("tagFilterInput");
+
+    if (tagInput) {
+        tagInput.value = "";
+    }
+
+    showSearch();
+
+}
+
+
+function getLatestRecipe() {
+
+    if (recipes.length === 0) {
+        return null;
+    }
+
+    const sorted =
+        recipes
+        .slice()
+        .sort(
+            function(a, b) {
+
+                const da = a.dateSaved || "";
+                const db = b.dateSaved || "";
+
+                if (da !== db) {
+                    return db.localeCompare(da);
+                }
+
+                return (b.id || 0) - (a.id || 0);
+
+            }
+        );
+
+    return sorted[0];
+
+}
+
+
+function renderHomePage() {
+
+    const nameEl =
+        document
+        .getElementById("homeLatestName");
+
+    const boxEl =
+        document
+        .getElementById("homeLatestBox");
+
+    if (!nameEl || !boxEl) return;
+
+    const latest =
+        getLatestRecipe();
+
+    if (!latest) {
+
+        nameEl.textContent =
+            "No recipes yet";
+
+        boxEl.disabled = true;
+
+        return;
+
+    }
+
+    nameEl.textContent =
+        latest.name || "";
+
+    boxEl.disabled = false;
+
+}
+
+
+function openLatestRecipe() {
+
+    const latest =
+        getLatestRecipe();
+
+    if (!latest) return;
+
+    currentRecipe =
+        recipes.findIndex(
+            r => r.id === latest.id
+        );
+
+    if (currentRecipe < 0) return;
+
+    showBook();
+
+}
+
+
 
 /* =========================================
    ADD OPTIONS
