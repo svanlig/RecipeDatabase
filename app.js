@@ -477,6 +477,11 @@ document.addEventListener(
 function hideAll() {
 
     document
+        .getElementById("homePage")
+        .classList.add("hidden");
+
+
+    document
         .getElementById("bookPage")
         .classList.add("hidden");
 
