@@ -537,6 +537,10 @@ function showSearch() {
     document
         .getElementById("searchPage")
         .classList.remove("hidden");
+   
+   document
+        .querySelector(".site-header")
+        .classList.remove("home-hidden");
 
     searchRecipes();
 
