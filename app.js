@@ -6,6 +6,8 @@ let currentRecipe = 0;
 
 let editingId = null;
 
+let startupComplete = false;
+
 
 /* =========================================
    DATABASE
