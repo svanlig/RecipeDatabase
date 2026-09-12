@@ -96,6 +96,8 @@ function loadRecipes() {
 
            displayRecipe();
 
+           renderHomePage();
+
         };
 
 }
