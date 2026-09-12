@@ -994,3 +994,286 @@ textarea {
 .choice-popup-inner button + button {
     border-top: 1px solid #ccc;
 }
+/* =====================================
+   HOME / LANDING PAGE
+===================================== */
+
+#homePage .home-card {
+    max-width: 780px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
+    background: #f7f6f2;
+    border: 1px solid #bdbbb6;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+/* ---------- Title box ---------- */
+
+.home-title-box {
+    border: 2px solid #555;
+
+    padding: 20px 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.home-main-title {
+    margin: 0;
+
+    font-family: "Aboreto", sans-serif;
+    font-weight: 700;
+
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    color: #292929;
+}
+
+.home-tagline {
+    font-family: "Cedarville Cursive", cursive;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+
+    line-height: 1.3;
+
+    color: #555;
+}
+
+/* ---------- Main grid ---------- */
+
+.home-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.8fr)
+        minmax(0, 1fr);
+
+    gap: 18px;
+
+    align-items: stretch;
+}
+
+/* ---------- Category box (mustard) ---------- */
+
+.home-categories {
+    background: #e8c05e;
+
+    border: 2px solid #555;
+
+    padding: 26px 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+.home-cat-group {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 0.95;
+
+    min-width: 0;
+}
+
+.home-categories a {
+    display: block;
+
+    font-family: "Aboreto", sans-serif;
+    font-weight: 700;
+
+    color: #a88a3c;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    letter-spacing: -0.01em;
+
+    transition: color 120ms ease;
+
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.home-categories a:hover,
+.home-categories a:focus-visible {
+    color: #2a2418;
+    outline: none;
+}
+
+.home-categories a:focus-visible {
+    outline: 2px solid #2a2418;
+    outline-offset: 4px;
+}
+
+.cat-huge {
+    font-size: clamp(2rem, 5vw, 3.6rem);
+}
+
+.cat-large {
+    font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+}
+
+.cat-medium {
+    font-size: clamp(1.15rem, 2.4vw, 1.8rem);
+}
+
+.home-indent-right {
+    align-self: flex-end;
+    margin-right: 12px;
+}
+
+/* ---------- Right column ---------- */
+
+.home-right {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.home-latest {
+    background: #dedbd5;
+
+    border: 2px solid #555;
+
+    flex: 1 1 auto;
+
+    padding: 22px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 120px;
+    min-width: 0;
+
+    text-align: left;
+
+    font: inherit;
+    color: inherit;
+
+    cursor: pointer;
+}
+
+.home-latest:hover,
+.home-latest:focus-visible {
+    background: #d3d0ca;
+    outline: none;
+}
+
+.home-latest:focus-visible {
+    outline: 2px solid #292929;
+    outline-offset: 2px;
+}
+
+.home-latest[disabled] {
+    cursor: default;
+    opacity: 0.65;
+}
+
+.home-latest-label {
+    font-family: "Aboreto", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    color: #555;
+}
+
+.home-latest-name {
+    font-family: "Aboreto", sans-serif;
+    font-weight: 700;
+
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+
+    color: #292929;
+
+    overflow-wrap: break-word;
+}
+
+.home-my-recipes {
+    align-self: flex-end;
+
+    font-family: "Cedarville Cursive", cursive;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+
+    color: #4a4a4a;
+    text-decoration: none;
+
+    padding: 4px 2px;
+
+    border-bottom: 1px solid transparent;
+
+    cursor: pointer;
+
+    transition:
+        color 120ms ease,
+        border-color 120ms ease;
+}
+
+.home-my-recipes:hover,
+.home-my-recipes:focus-visible {
+    color: #292929;
+    border-bottom-color: #292929;
+    outline: none;
+}
+
+/* Hide the site header on the home page only */
+
+.site-header.home-hidden {
+    display: none;
+}
+
+/* ---------- Home responsive ---------- */
+
+@media (max-width: 720px) {
+
+    #homePage .home-card {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .home-title-box {
+        padding: 16px 18px;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .home-categories {
+        padding: 20px 18px 24px;
+        gap: 8px;
+    }
+
+    .home-latest {
+        min-height: 96px;
+        padding: 16px 18px;
+    }
+}
