@@ -283,14 +283,47 @@
                         Delete
                     </button>
 
-                    <button onclick="printRecipe()">
-                        PDF
-                    </button>
+                    <div class="export-wrap">
+                        <button
+                            type="button"
+                            onclick="openExportMenu(event)">
+                            Export
+                        </button>
+
+                        <div
+                            id="exportMenu"
+                            class="export-popup hidden"
+                            role="menu">
+
+                            <div class="export-popup-header">
+                                Export Recipe
+                            </div>
+
+                            <button
+                                type="button"
+                                role="menuitem"
+                                onclick="exportRecipePDF()">
+                                PDF
+                            </button>
+
+                            <button
+                                type="button"
+                                role="menuitem"
+                                onclick="exportRecipePNG()">
+                                PNG
+                            </button>
+
+                            <button
+                                type="button"
+                                role="menuitem"
+                                onclick="closeExportMenu()">
+                                Cancel
+                            </button>
+
+                        </div>
+                    </div>
 
                 </div>
-
-
-            </div>
 
 
 
