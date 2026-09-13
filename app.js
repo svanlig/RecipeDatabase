@@ -2779,3 +2779,226 @@ async function testCloudRecipes() {
 }
 
 testCloudRecipes();
+
+/* =========================================
+   EXPORT MENU (PDF / PNG)
+   ADDED AT END OF FILE. DOES NOT MODIFY
+   ANY EXISTING FUNCTION.
+========================================= */
+
+function openExportMenu(event) {
+
+    if (event) {
+        event.stopPropagation();
+    }
+
+    const menu =
+        document.getElementById("exportMenu");
+
+    if (!menu) return;
+
+    menu.classList.remove("hidden");
+
+    setTimeout(function () {
+
+        document.addEventListener(
+            "click",
+            closeExportMenuOnOutsideClick
+        );
+
+    }, 0);
+
+}
+
+
+function closeExportMenu() {
+
+    const menu =
+        document.getElementById("exportMenu");
+
+    if (menu) {
+        menu.classList.add("hidden");
+    }
+
+    document.removeEventListener(
+        "click",
+        closeExportMenuOnOutsideClick
+    );
+
+}
+
+
+function closeExportMenuOnOutsideClick(event) {
+
+    const menu =
+        document.getElementById("exportMenu");
+
+    const wrap =
+        document.querySelector(".export-wrap");
+
+    if (!menu) return;
+
+    if (wrap && wrap.contains(event.target)) {
+        return;
+    }
+
+    closeExportMenu();
+
+}
+
+
+/*
+ * PDF export — calls the existing printRecipe().
+ * Do NOT reimplement PDF printing.
+ */
+
+function exportRecipePDF() {
+
+    closeExportMenu();
+
+    printRecipe();
+
+}
+
+
+/*
+ * PNG export — captures the entire .recipe-card
+ * as a PNG, including content that extends below
+ * the visible screen. The Edit / Delete / Export
+ * buttons are hidden in the cloned document so
+ * they do not appear in the exported image.
+ */
+
+function exportRecipePNG() {
+
+    closeExportMenu();
+
+    if (typeof html2canvas === "undefined") {
+
+        alert(
+            "PNG export library is still loading. Please try again in a moment."
+        );
+
+        return;
+
+    }
+
+    const card =
+        document.querySelector(".recipe-card");
+
+    if (!card) {
+
+        alert(
+            "Could not find the recipe card to export."
+        );
+
+        return;
+
+    }
+
+    /*
+     * Wait for the recipe photo (and any other images)
+     * to finish loading before capturing, so the PNG
+     * includes the photo when one exists.
+     */
+
+    const images =
+        card.querySelectorAll("img");
+
+    const waits =
+        Array.from(images).map(function (img) {
+
+            if (img.complete && img.naturalWidth > 0) {
+                return Promise.resolve();
+            }
+
+            return new Promise(function (resolve) {
+
+                img.onload = resolve;
+                img.onerror = resolve;
+
+            });
+
+        });
+
+    Promise.all(waits).then(function () {
+
+        return html2canvas(card, {
+
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: "#ffffff",
+            logging: false,
+            windowWidth: card.scrollWidth,
+            windowHeight: card.scrollHeight,
+
+            onclone: function (clonedDocument) {
+
+                const actions =
+                    clonedDocument.querySelector(".top-actions");
+
+                if (actions) {
+                    actions.style.display = "none";
+                }
+
+            }
+
+        });
+
+    }).then(function (canvas) {
+
+        /*
+         * Build a safe filename from the current
+         * recipe name: recipes[currentRecipe].name
+         */
+
+        let recipeName = "recipe";
+
+        if (
+            typeof recipes !== "undefined" &&
+            recipes.length > 0 &&
+            recipes[currentRecipe] &&
+            recipes[currentRecipe].name
+        ) {
+
+            recipeName =
+                recipes[currentRecipe].name;
+
+        }
+
+        const safeName =
+            String(recipeName)
+                .replace(/[^a-z0-9]+/gi, "-")
+                .replace(/^-+|-+$/g, "")
+                .toLowerCase() || "recipe";
+
+        const link =
+            document.createElement("a");
+
+        link.download =
+            safeName + ".png";
+
+        link.href =
+            canvas.toDataURL("image/png");
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+    }).catch(function (error) {
+
+        console.error(
+            "PNG export failed:",
+            error
+        );
+
+        alert(
+            "Sorry, the PNG export failed. Please try again."
+        );
+
+    });
+
+}
