@@ -1346,19 +1346,19 @@ textarea {
 /* ---------- PAGE SHELL ---------- */
 
 #homePage {
-    background-color: #e2e8f0;
+    background-color: #ffffff;
     padding: 24px 16px;
     min-height: 100vh;
 }
 
 .home-card {
-    /* The white "poster" inside the dark page */
+    /* The white "poster" with a clean black border */
     background-color: #ffffff;
-    border: 16px solid #222222;
+    border: 2px solid #222222;
     max-width: 560px;
     margin: 0 auto;
     padding: 24px 24px 20px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    box-shadow: none;
     color: #222222;
     display: flex;
     flex-direction: column;
