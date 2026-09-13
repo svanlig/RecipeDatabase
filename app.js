@@ -2169,7 +2169,7 @@ function editCurrentRecipe() {
     document
         .getElementById("inputCategory")
         .value =
-        recipe.category || "Breakfast";
+        recipe.category || "Breakfast & Brunch";
 
     document
         .getElementById("inputTags")
