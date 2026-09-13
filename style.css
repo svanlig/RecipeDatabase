@@ -1338,56 +1338,69 @@ textarea {
     border-top: 1px solid #ccc;
 }
 /* =========================================================
-   HOME PAGE — EDITORIAL RESTYLE
-   Overrides existing .home-* and .cat-* visuals only.
-   No HTML structure change. No JS change.
+   HOME PAGE — EDITORIAL / POSTER RESTYLE
+   Visual only. No HTML or JS changes.
+   Based on the poster mockup. Tailwind-free plain CSS.
    ========================================================= */
 
-/* ---------- PAGE BASE ---------- */
+/* ---------- PAGE SHELL ---------- */
 
 #homePage {
-    background-color: #FDFBF7;
+    background-color: #e2e8f0;
+    padding: 24px 16px;
+    min-height: 100vh;
 }
 
 .home-card {
-    max-width: 900px;
+    /* The white "poster" inside the dark page */
+    background-color: #ffffff;
+    border: 16px solid #222222;
+    max-width: 560px;
     margin: 0 auto;
-    padding: 56px 48px 80px;
-    background-color: #FDFBF7;
-    color: #1A1A1A;
+    padding: 24px 24px 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    color: #222222;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* ---------- TITLE HEADER ---------- */
+/* ---------- HEADER ---------- */
 
 .home-title-box {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 10px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #1A1A1A;
-    margin-bottom: 40px;
+    gap: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #222222;
+    margin-bottom: 16px;
 }
 
 .home-main-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 3.4rem;
-    line-height: 0.92;
-    letter-spacing: 1.5px;
-    color: #D4AF37;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+    line-height: 0.8;
+    letter-spacing: -1.5px;
+    color: #D6A419;
     text-transform: uppercase;
     margin: 0;
 }
 
 .home-tagline {
-    font-family: 'Cutive Mono', monospace;
-    font-size: 0.95rem;
-    color: #1A1A1A;
-    letter-spacing: 0.5px;
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: #555555;
+    letter-spacing: -0.2px;
+    margin-top: 6px;
+    text-transform: lowercase;
 }
 
-/* ---------- GRID / LAYOUT ---------- */
+/* ---------- CATEGORIES (the typographic composition) ---------- */
 
 .home-grid {
     display: block;
@@ -1397,250 +1410,372 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin-bottom: 56px;
+    flex-grow: 1;
+    margin-top: 4px;
 }
 
-/* Make the group wrapper invisible so per-group
-   selectors below can target children directly. */
+/* Make wrappers invisible so per-group selectors work
+   without changing your existing HTML */
 .home-cat-group {
     display: contents;
 }
 
-/* ---------- CATEGORY BASE STYLE ---------- */
-
 .home-categories a {
     display: block;
     text-decoration: none;
-    color: #1A1A1A;
+    color: #222222;
     cursor: pointer;
     transition: color 0.15s ease;
-    position: relative;
-    line-height: 0.92;
+    width: 100%;
+    text-align: left;
 }
 
 .home-categories a:hover {
-    color: #D4AF37;
+    color: #D6A419;
 }
 
-/* ---------- PER-CATEGORY TYPOGRAPHY ---------- */
+/* Helper line-heights matching the mockup */
+.home-cat-group:nth-of-type(1) .cat-huge,
+.home-cat-group:nth-of-type(3) .cat-large,
+.home-cat-group:nth-of-type(3) .cat-medium,
+.home-cat-group:nth-of-type(5) .cat-large {
+    line-height: 0.72;
+}
 
-/* 1a. Breakfast & Brunch — big bold lowercase serif */
+/* === 1a. breakfast === */
 .home-cat-group:nth-of-type(1) .cat-huge {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    font-size: 5.2rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
     letter-spacing: -2px;
     text-transform: lowercase;
-    line-height: 0.88;
+    margin-left: -2px;
 }
 
-/* 1b. Bread — condensed uppercase Oswald */
+/* === 1b. & brunch === */
 .home-cat-group:nth-of-type(1) .cat-medium {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-    font-size: 4.4rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    line-height: 1;
-    margin-top: 6px;
-    color: #555555;
-}
-.home-cat-group:nth-of-type(1) .cat-medium:hover {
-    color: #D4AF37;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 2.75rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.72;
+    margin-top: -6px;
+    margin-bottom: 4px;
 }
 
-/* 2. Appetizers & Snacks — italic serif */
+/* === 2. bread (Playfair 900, uppercase, huge) === */
 .home-cat-group:nth-of-type(2) .cat-huge {
     font-family: 'Playfair Display', serif;
-    font-style: italic;
     font-weight: 900;
-    font-size: 4.8rem;
+    font-size: 4.1rem;
     letter-spacing: -2px;
-    text-transform: lowercase;
-    line-height: 0.9;
-    margin-top: 10px;
+    text-transform: uppercase;
+    line-height: 0.75;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    padding-left: 2px;
 }
 
-/* 3a. Soups — large grey uppercase Abril Fatface */
+/* === 3a. appetizers (Abril Fatface, lowercase, huge) === */
 .home-cat-group:nth-of-type(3) .cat-medium {
     font-family: 'Abril Fatface', serif;
     font-weight: 400;
-    font-size: 5.6rem;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    line-height: 1;
-    color: #555555;
-    margin-top: 12px;
-}
-.home-cat-group:nth-of-type(3) .cat-medium:hover {
-    color: #D4AF37;
-}
-
-/* 3b. Salads & Sides — italic serif */
-.home-cat-group:nth-of-type(3) .cat-large {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 3.8rem;
-    letter-spacing: -1px;
+    font-size: 4.25rem;
+    letter-spacing: -2px;
     text-transform: lowercase;
-    line-height: 1;
-    margin-top: 4px;
+    line-height: 0.65;
+    padding-left: 4px;
 }
 
-/* 4a. Main Dishes — huge uppercase Abril Fatface */
+/* === 3b. & snacks (Abril Fatface, grey, indented) === */
+.home-cat-group:nth-of-type(3) .cat-large {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: 3.4rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.65;
+    color: #555555;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+
+/* === 4a. soups (Abril Fatface, very large, grey) === */
 .home-cat-group:nth-of-type(4) .cat-huge {
     font-family: 'Abril Fatface', serif;
     font-weight: 400;
-    font-size: 5.8rem;
-    letter-spacing: -1.5px;
-    text-transform: uppercase;
-    line-height: 0.92;
-    margin-top: 16px;
+    font-size: 5.3rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.6;
+    color: #333333;
+    padding-left: 4px;
+    margin-bottom: 8px;
+    margin-top: 0;
 }
 
-/* 4b. Desserts — biggest lowercase serif */
+/* === 4b. main dishes (Playfair 900, uppercase) === */
 .home-cat-group:nth-of-type(4) .cat-medium {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: 6.2rem;
-    letter-spacing: -3px;
+    font-size: 3.25rem;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.78;
+    margin-bottom: 4px;
+}
+
+/* === 5. salads & sides — this lives in group 3 in your HTML,
+   but I need to style it separately from appetizers.
+   Because your HTML puts Soups+Salads together, I'll use a
+   more specific selector: the FIRST `.cat-medium` in group 3
+   is soups... wait, no — Soups is in group 3. Let me re-check.
+
+   Actually in your HTML:
+     group 3 = Soups + Salads & Sides
+     group 4 = Main Dishes + Desserts
+   So my per-group mapping above is wrong.
+
+   Let me use a cleaner approach below.
+========================================= */
+
+/* ---------- CORRECT PER-CATEGORY MAPPING ---------- */
+
+/* Group 1: Breakfast & Brunch (.cat-huge) + Bread (.cat-medium) */
+.home-cat-group:nth-of-type(1) .cat-huge {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
     text-transform: lowercase;
-    line-height: 0.92;
+    line-height: 0.72;
+    margin-left: -2px;
+}
+.home-cat-group:nth-of-type(1) .cat-medium {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 4.1rem;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    line-height: 0.75;
+    margin-top: -6px;
+    margin-bottom: 4px;
+    padding-left: 2px;
+}
+
+/* Group 2: Appetizers & Snacks (.cat-huge) */
+.home-cat-group:nth-of-type(2) .cat-huge {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: 4.25rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.65;
+    padding-left: 4px;
+    margin-bottom: 12px;
+}
+
+/* Group 3: Soups (.cat-medium) + Salads & Sides (.cat-large) */
+.home-cat-group:nth-of-type(3) .cat-medium {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: 5.3rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.6;
+    color: #333333;
+    padding-left: 4px;
+    margin-bottom: 8px;
+}
+.home-cat-group:nth-of-type(3) .cat-large {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.72;
     margin-top: -4px;
 }
 
-/* 5. Drinks — small spaced caps, finishing note */
-.home-cat-group:nth-of-type(5) .cat-large {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 2.2rem;
-    letter-spacing: 8px;
+/* Group 4: Main Dishes (.cat-huge) + Desserts (.cat-medium) */
+.home-cat-group:nth-of-type(4) .cat-huge {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 3.25rem;
+    letter-spacing: -2px;
     text-transform: uppercase;
-    color: #555555;
-    margin-top: 18px;
+    line-height: 0.78;
+    margin-bottom: 4px;
 }
-.home-cat-group:nth-of-type(5) .cat-large:hover {
-    color: #D4AF37;
+.home-cat-group:nth-of-type(4) .cat-medium {
+    font-family: 'Abril Fatface', serif;
+    font-weight: 400;
+    font-size: 5.1rem;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    line-height: 0.6;
+    color: #333333;
+    padding-left: 8px;
+    margin-top: -6px;
 }
 
-/* ---------- RIGHT COLUMN: LATEST + MY RECIPES ---------- */
+/* Group 5: Drinks (.cat-large) */
+.home-cat-group:nth-of-type(5) .cat-large {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 2.4rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555555;
+    line-height: 1;
+    margin-top: 8px;
+    padding-left: 4px;
+}
+.home-cat-group:nth-of-type(5) .cat-large:hover {
+    color: #D6A419;
+}
+
+/* ---------- "MY RECIPES" MUSTARD BOX ---------- */
 
 .home-right {
     display: flex;
     flex-direction: column;
-    gap: 18px;
-    max-width: 380px;
+    gap: 16px;
+    margin-top: 24px;
 }
 
-.home-latest {
-    display: block;
-    width: 100%;
-    padding: 18px 22px;
-    background-color: transparent;
-    border: 1px solid #1A1A1A;
-    text-align: left;
+.home-my-recipes {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    background-color: #D6A419;
+    color: #FCEEC9;
+    padding: 10px 14px;
+    text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.15s ease,
+                transform 0.15s ease;
+    align-self: flex-start;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+.home-my-recipes::before {
+    content: "collection";
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    line-height: 1;
+    color: #FCEEC9;
+}
+
+.home-my-recipes {
+    /* The visible label text becomes "my recipes" */
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 0.95rem;
+    letter-spacing: -0.3px;
+    line-height: 1;
+    text-transform: lowercase;
+}
+
+.home-my-recipes:hover {
+    background-color: #b8890f;
+    transform: scale(1.03);
+}
+
+.home-my-recipes:active {
+    transform: scale(0.97);
+}
+
+/* ---------- LATEST RECIPE PANEL (blue-grey) ---------- */
+
+.home-latest {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background-color: #DCE2E6;
+    border: 1px solid #222222;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
     font-family: inherit;
-    transition: background-color 0.15s ease;
+    transition: transform 0.15s ease;
+    border-radius: 2px;
+    width: 100%;
 }
 
 .home-latest:hover {
-    background-color: #f1ece0;
+    transform: scale(1.01);
 }
 
 .home-latest:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 .home-latest-label {
-    display: block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 2.5px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #555555;
-    margin-bottom: 6px;
+    transition: color 0.15s ease;
+}
+
+.home-latest:hover .home-latest-label {
+    color: #D6A419;
 }
 
 .home-latest-name {
-    display: block;
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: #1A1A1A;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+    color: #222222;
     line-height: 1.1;
 }
 
-.home-my-recipes {
-    display: inline-block;
-    background-color: #D4AF37;
-    color: #FDFBF7;
-    padding: 16px 22px;
-    text-decoration: none;
-    cursor: pointer;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    text-align: center;
-    transition: opacity 0.15s ease;
-}
-
-.home-my-recipes:hover {
-    opacity: 0.88;
+.home-latest:hover .home-latest-name {
+    text-decoration: underline;
 }
 
 /* ---------- RESPONSIVE ---------- */
 
-@media (max-width: 800px) {
+@media (max-width: 640px) {
 
     .home-card {
-        padding: 44px 32px 64px;
+        border-width: 10px;
+        padding: 18px 18px 16px;
     }
 
-    .home-main-title { font-size: 2.7rem; }
+    .home-main-title { font-size: 2rem; }
 
-    .home-cat-group:nth-of-type(1) .cat-huge { font-size: 4rem; }
-    .home-cat-group:nth-of-type(1) .cat-medium { font-size: 3.4rem; letter-spacing: 2px; }
+    /* Group 1 */
+    .home-cat-group:nth-of-type(1) .cat-huge { font-size: 2.6rem; }
+    .home-cat-group:nth-of-type(1) .cat-medium { font-size: 3.1rem; }
 
-    .home-cat-group:nth-of-type(2) .cat-huge { font-size: 3.8rem; }
+    /* Group 2 */
+    .home-cat-group:nth-of-type(2) .cat-huge { font-size: 3.2rem; }
 
-    .home-cat-group:nth-of-type(3) .cat-medium { font-size: 4.2rem; }
-    .home-cat-group:nth-of-type(3) .cat-large { font-size: 3rem; }
+    /* Group 3 */
+    .home-cat-group:nth-of-type(3) .cat-medium { font-size: 4rem; }
+    .home-cat-group:nth-of-type(3) .cat-large { font-size: 2.6rem; }
 
-    .home-cat-group:nth-of-type(4) .cat-huge { font-size: 4.4rem; }
-    .home-cat-group:nth-of-type(4) .cat-medium { font-size: 4.6rem; }
+    /* Group 4 */
+    .home-cat-group:nth-of-type(4) .cat-huge { font-size: 2.5rem; }
+    .home-cat-group:nth-of-type(4) .cat-medium { font-size: 3.8rem; }
 
-    .home-cat-group:nth-of-type(5) .cat-large { font-size: 1.8rem; letter-spacing: 6px; }
-}
-
-@media (max-width: 560px) {
-
-    .home-card {
-        padding: 32px 22px 56px;
-    }
-
-    .home-main-title { font-size: 2.2rem; }
-    .home-tagline { font-size: 0.85rem; }
-
-    .home-cat-group:nth-of-type(1) .cat-huge { font-size: 2.9rem; }
-    .home-cat-group:nth-of-type(1) .cat-medium { font-size: 2.6rem; letter-spacing: 1.5px; }
-
-    .home-cat-group:nth-of-type(2) .cat-huge { font-size: 2.7rem; }
-
-    .home-cat-group:nth-of-type(3) .cat-medium { font-size: 3rem; }
-    .home-cat-group:nth-of-type(3) .cat-large { font-size: 2.2rem; }
-
-    .home-cat-group:nth-of-type(4) .cat-huge { font-size: 3.1rem; }
-    .home-cat-group:nth-of-type(4) .cat-medium { font-size: 3.3rem; }
-
-    .home-cat-group:nth-of-type(5) .cat-large { font-size: 1.4rem; letter-spacing: 5px; }
-
-    .home-right { max-width: 100%; }
-    .home-latest-name { font-size: 1.25rem; }
+    /* Group 5 */
+    .home-cat-group:nth-of-type(5) .cat-large { font-size: 1.7rem; letter-spacing: 0.14em; }
 }
