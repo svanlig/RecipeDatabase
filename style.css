@@ -1201,3 +1201,15 @@ textarea {
     font-size: 36px;
     padding-left: 10px;
 }
+.cat-soups {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 85px;
+    font-weight: 400;
+    line-height: 51px;
+    letter-spacing: -4.25px;
+    text-transform: lowercase;
+    color: #333333;
+    padding-left: 4px;
+    margin-bottom: 8px;
+}
