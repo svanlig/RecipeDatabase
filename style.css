@@ -1090,7 +1090,7 @@ textarea {
 /* ---------- Title ---------- */
 
 .home-title-box {
-    padding: 30px 28px 24px;
+    padding: 30px 28px 24px, 0;
     border: none;
     border-bottom: 2px solid #000000;
 }
@@ -1111,13 +1111,24 @@ textarea {
 .home-main-title span {
     display: block;
 }
+
+.home-tagline {
+    display: block;
+    margin-top: 12px;
+    font-family: "Cedarville Cursive", monospace;
+    font-size: 15px;
+    line-height: 1;
+    color: #000000;
+}
 .cat-breakfast {
     display: flex;
     flex-direction: column;
     line-height: 0.72;
     text-decoration: none;
-    color: #555555;
+    color: #000000;
     cursor: pointer;
+    text-transform: lowercase
+    margin-top: 10px
 }
 
 .breakfast-main {
@@ -1132,13 +1143,4 @@ textarea {
     font-size: 42px;
     font-weight: 800;
     letter-spacing: -2.1px;
-}
-
-.home-tagline {
-    display: block;
-    margin-top: 12px;
-    font-family: "Cedarville Cursive", monospace;
-    font-size: 15px;
-    line-height: 1;
-    color: #000000;
 }
