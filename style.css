@@ -1277,10 +1277,9 @@ textarea {
 }
 
 .home-right {
-    position: absolute;
-    top: 10px;
-    right: 28px;
-    bottom: 10px;
+    position: static;
+    width: 100%;
+    margin-top: 25px;
     z-index: 2;
 }
 
