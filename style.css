@@ -1090,7 +1090,7 @@ textarea {
 /* ---------- Title ---------- */
 
 .home-title-box {
-    padding: 30px 28px 40px, 0;
+    padding: 30px 28px 50px, 0;
     border: none;
     border-bottom: 2px solid #000000;
 }
@@ -1116,7 +1116,8 @@ textarea {
     display: block;
     margin-top: 12px;
     font-family: "Cutive Mono", monospace;
-    font-size: 15px;
+    font-size: 25px;
+    font-weight: 400;
     line-height: 1;
     text-transform: lowercase;
     color: #000000;
@@ -1152,13 +1153,14 @@ textarea {
     display: block;
     font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 40px;
-    font-weight: 400;
+    font-weight: 800;
     line-height: 1;
     letter-spacing: -2px;
-    text-transform: lowercase;
+    text-transform: uppercase;
     color: #555555;
     padding-left: 4px;
     margin-top: 10px;
+    cursor: pointer;
 }
 .cat-appetizers {
     display: flex;
@@ -1282,4 +1284,9 @@ textarea {
     font-weight: 700;
     background: #d4af37;
     padding: 3px 6px;
+}
+
+.home-categories a,
+.home-latest {
+    cursor: pointer;
 }
