@@ -742,35 +742,40 @@ textarea {
 
 @media (max-width: 480px) {
 
-
     #recipeTitle {
         font-size: 2.3rem;
     }
 
-
     .recipe-topbar {
         align-items: flex-start;
         gap: 10px;
-
         padding-bottom: 8px;
     }
-
 
     .top-actions {
         flex-wrap: wrap;
         justify-content: flex-end;
     }
 
-
     .photo-section,
     #recipeImage {
         min-height: 190px;
     }
 
-  
+    .content-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right-column {
+        order: 1;
+    }
+
+    .instructions-column {
+        order: 2;
+    }
+
 }
-
-
 /* =====================================
    PRINT / PDF
 ===================================== */
