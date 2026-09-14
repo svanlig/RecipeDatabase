@@ -1265,23 +1265,39 @@ textarea {
     color: #000000;
     cursor: pointer;
 }
+.home-grid {
+    position: relative;
+}
+
+.home-right {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 2;
+}
+
+.home-latest {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    text-align: left;
+    font: inherit;
+    color: #000000;
+    cursor: pointer;
+}
 
 .home-latest-label,
 .home-latest-name {
     font-family: "Cutive Mono", monospace;
     font-size: 18px;
     line-height: 1.2;
-}
-
-.home-latest-label {
     font-weight: 700;
-    background: #d4af37;
-    padding: 3px 6px;
 }
 
+.home-latest-label,
 .home-latest-name {
-    display: inline;
-    font-weight: 700;
     background: #d4af37;
     padding: 3px 6px;
 }
