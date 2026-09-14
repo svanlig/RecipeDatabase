@@ -1213,3 +1213,15 @@ textarea {
     padding-left: 4px;
     margin-bottom: 8px;
 }
+.cat-main-dishes {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 40.56px;
+    letter-spacing: -2.6px;
+    text-transform: uppercase;
+    color: #222222;
+    margin-bottom: 4px;
+    padding: 0;
+}
