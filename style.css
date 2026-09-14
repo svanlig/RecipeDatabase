@@ -1090,7 +1090,7 @@ textarea {
 /* ---------- Title ---------- */
 
 .home-title-box {
-    padding: 30px 28px 35px, 0;
+    padding: 30px 28px 40px, 0;
     border: none;
     border-bottom: 2px solid #000000;
 }
@@ -1115,9 +1115,10 @@ textarea {
 .home-tagline {
     display: block;
     margin-top: 12px;
-    font-family: "Cedarville Cursive", monospace;
+    font-family: "Cutive Mono", monospace;
     font-size: 15px;
     line-height: 1;
+    text-transform: lowercase;
     color: #000000;
 }
 .cat-breakfast {
