@@ -1783,3 +1783,36 @@ textarea {
     /* Group 5 */
     .home-cat-group:nth-of-type(5) .cat-large { font-size: 1.7rem; letter-spacing: 0.14em; }
 }
+/* =========================================================
+   CATEGORY SECTION — SURGICAL FIX
+   Removes mustard background + border on the category area.
+   Makes each category clickable only as wide as its text.
+   Does NOT change fonts, sizes, positions, or colors.
+   ========================================================= */
+
+/* 1. Remove any background and border from the category area.
+      Force it to blend with the white card behind it. */
+#homePage .home-categories,
+#homePage nav.home-categories,
+#homePage .home-grid,
+#homePage section.home-grid,
+#homePage .home-cat-group {
+    background-color: transparent !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* 2. Category anchors: clickable only as wide as the text.
+      Left-aligned so the whole block still reads as a cascade. */
+#homePage .home-categories a,
+#homePage .home-cat-group a {
+    display: block !important;
+    width: auto !important;
+    max-width: max-content !important;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin-right: auto;
+}
