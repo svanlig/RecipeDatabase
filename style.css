@@ -1272,8 +1272,7 @@ textarea {
 }
 .home-grid {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: block;
 }
 
 .home-right {
