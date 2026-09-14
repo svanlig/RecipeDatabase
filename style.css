@@ -1369,20 +1369,21 @@ textarea {
 
 .home-title-box {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #222222;
-    margin-bottom: 16px;
+    gap: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    margin: 0 0 16px 0;
 }
 
 .home-main-title {
     font-family: 'Abril Fatface', serif;
     font-weight: 800;
     font-size: 2.5rem;
-    line-height: 0.8;
+    line-height: 0.9;
     letter-spacing: -1.5px;
     color: #D6A419;
     text-transform: uppercase;
@@ -1391,15 +1392,18 @@ textarea {
 
 .home-tagline {
     display: block;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: #555555;
-    letter-spacing: -0.2px;
-    margin-top: 6px;
-    text-transform: lowercase;
+    font-family: 'Cedarville Cursive', cursive;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: 1.2;
+    margin: 4px 0 8px 0;
+    text-transform: none;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 8px;
+    width: 100%;
 }
-
 /* ---------- CATEGORIES (the typographic composition) ---------- */
 
 .home-grid {
