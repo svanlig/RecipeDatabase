@@ -1147,7 +1147,7 @@ textarea {
    
 }
 
-.cat-medium {
+.cat-bread {
     display: block;
     font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 40px;
@@ -1157,6 +1157,7 @@ textarea {
     text-transform: lowercase;
     color: #555555;
     padding-left: 4px;
+    margin-top: 10px;
 }
 .cat-appetizers {
     display: flex;
