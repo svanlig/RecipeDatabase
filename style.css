@@ -1127,8 +1127,8 @@ textarea {
     text-decoration: none;
     color: #000000;
     cursor: pointer;
-    text-transform: lowercase
-    margin-top: 10px
+    text-transform: lowercase;
+    margin-top: 20px
 }
 
 .breakfast-main {
@@ -1143,4 +1143,16 @@ textarea {
     font-size: 42px;
     font-weight: 800;
     letter-spacing: -2.1px;
+}
+
+.cat-medium {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -2px;
+    text-transform: lowercase;
+    color: #555555;
+    padding-left: 4px;
 }
