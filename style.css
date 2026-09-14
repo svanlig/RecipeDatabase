@@ -1596,11 +1596,13 @@ textarea {
 .home-cat-group:nth-of-type(3) .cat-large {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 800;
-    font-size: 3.5rem;
-    letter-spacing: -2px;
+    font-size: 46px;
+    letter-spacing: -2.3px;
     text-transform: lowercase;
-    line-height: 0.72;
+    line-height: 33.12px;
     margin-top: -4px;
+    margin-bottom: 4px;
+    color: #555555;
 }
 
 /* Group 4: Main Dishes (.cat-huge) + Desserts (.cat-medium) */
