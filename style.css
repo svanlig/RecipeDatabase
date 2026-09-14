@@ -1091,7 +1091,8 @@ textarea {
 
 .home-title-box {
     padding: 30px 28px 24px;
-    border: 2px solid #000000;
+    border: none;
+    border-bottom: 2px solid #000000;
 }
 
 .home-main-title {
@@ -1099,16 +1100,17 @@ textarea {
     font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 56px;
     font-weight: 800;
-    line-height: 0.88;
+    line-height: 1;
     letter-spacing: -3px;
     text-transform: uppercase;
-    color: #000000;
+    color: #d4af37;
+    white-space: nowrap;
 }
 
 .home-tagline {
     display: block;
-    margin-top: 18px;
-    font-family: "Cutive Mono", monospace;
+    margin-top: 12px;
+    font-family: "Cedarville Cursive", monospace;
     font-size: 15px;
     line-height: 1;
     color: #000000;
