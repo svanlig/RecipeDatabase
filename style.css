@@ -1250,3 +1250,36 @@ textarea {
     margin-top: 4px;
     padding-left: 4px;
 }
+.home-latest {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    text-align: left;
+    font: inherit;
+    color: #000000;
+    cursor: pointer;
+}
+
+.home-latest-label,
+.home-latest-name {
+    font-family: "Cutive Mono", monospace;
+    font-size: 18px;
+    line-height: 1.2;
+}
+
+.home-latest-label {
+    font-weight: 700;
+    background: #d4af37;
+    padding: 3px 6px;
+}
+
+.home-latest-name {
+    display: inline;
+    font-weight: 700;
+    background: #d4af37;
+    padding: 3px 6px;
+}
