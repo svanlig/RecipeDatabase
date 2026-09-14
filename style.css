@@ -1225,3 +1225,14 @@ textarea {
     margin-bottom: 4px;
     padding: 0;
 }
+.cat-desserts {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 82px;
+    font-weight: 400;
+    line-height: 49.2px;
+    letter-spacing: -4.1px;
+    text-transform: lowercase;
+    color: #333333;
+    padding-left: 8px;
+}
