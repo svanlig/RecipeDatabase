@@ -1236,3 +1236,15 @@ textarea {
     color: #333333;
     padding-left: 8px;
 }
+.cat-drinks {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 38px;
+    letter-spacing: 6.84px;
+    text-transform: uppercase;
+    color: #555555;
+    margin-top: 4px;
+    padding-left: 4px;
+}
