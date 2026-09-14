@@ -1077,13 +1077,11 @@ textarea {
 /* ---------- White poster ---------- */
 
 #homePage .home-card {
-    max-width: none;
-    margin: 0;
+    max-width: 1100px;
+    margin: 24px auto;
     padding: 24px;
-    
     background: #ffffff;
-    border: 15px solid #000000;
-
+    border: 4px solid #000000;
     display: flex;
     flex-direction: column;
 }
