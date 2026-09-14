@@ -1097,14 +1097,41 @@ textarea {
 
 .home-main-title {
     margin: 0;
+    display: flex;
+    flex-direction: column;
     font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 56px;
     font-weight: 800;
-    line-height: 1;
+    line-height: 0.88;
     letter-spacing: -3px;
     text-transform: uppercase;
     color: #d4af37;
-    white-space: nowrap;
+}
+
+.home-main-title span {
+    display: block;
+}
+.cat-breakfast {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.72;
+    text-decoration: none;
+    color: #555555;
+    cursor: pointer;
+}
+
+.breakfast-main {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -2.8px;
+}
+
+.breakfast-sub {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: -2.1px;
 }
 
 .home-tagline {
