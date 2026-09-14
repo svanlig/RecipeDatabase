@@ -1062,3 +1062,28 @@ textarea {
 .export-popup button + button {
     border-top: 1px solid #ccc;
 }
+/* =====================================
+   HOME / LANDING PAGE — NEW DESIGN
+===================================== */
+
+/* ---------- Page background ---------- */
+
+#homePage {
+    background: #e2e8f0;
+    min-height: 100vh;
+    padding: 24px 16px;
+}
+
+/* ---------- White poster ---------- */
+
+#homePage .home-card {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 24px;
+    
+    background: #ffffff;
+    border: 2px solid #222222;
+
+    display: flex;
+    flex-direction: column;
+}
