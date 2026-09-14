@@ -701,13 +701,14 @@ textarea {
 
 
     .instructions-column {
-        padding-right: 0;
+       order: 1;
+       padding-right: 0;
     }
 
 
     .right-column {
+        order: 2;
         padding: 18px 0 30px;
-
         border-left: none;
         border-top: 1px solid #555;
     }
