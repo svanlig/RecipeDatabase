@@ -1152,12 +1152,12 @@ textarea {
 .cat-bread {
     display: block;
     font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: 40px;
+    font-size: 66px;
     font-weight: 800;
     line-height: 1;
     letter-spacing: -2px;
     text-transform: uppercase;
-    color: #555555;
+    color: #000000;
     padding-left: 4px;
     margin-top: 10px;
     cursor: pointer;
